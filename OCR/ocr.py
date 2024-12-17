@@ -33,14 +33,14 @@ def perform_ocr(image_path, languages=['ch_sim', 'en']):
         })
     return structured_results
 
-def save_results_to_json(results, output_path="ocr_results.json"):
+def save_results_to_json(results, output_path):
     """
     保存OCR结果为JSON文件，确保兼容JSON序列化
     """
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=4)
 
-def main(image_path):
+def run_ocr(image_path, output_path="ocr_results.json"):
     """
     主流程函数：预处理图像，执行OCR，保存结果
     """
@@ -55,10 +55,11 @@ def main(image_path):
         print(f"Text: {result['text']}, BBox: {result['bbox']}, Confidence: {result['confidence']}")
     
     print("保存结果为JSON文件...")
-    save_results_to_json(results)
-    print("处理完成，结果保存在 ocr_results.json 文件中！")
+    save_results_to_json(results, output_path)
+    print("处理完成，结果保存在" + output_path + "ocr_results.json 文件中！")
 
-# 调用主流程
+
 if __name__ == "__main__":
-    image_path = "img/modern_poster.jpg"  # 替换为你的图像路径
-    main(image_path)
+    image_path = "example.jpg"
+    output_path = "ocr_results.json"
+    run_ocr(image_path, output_path)

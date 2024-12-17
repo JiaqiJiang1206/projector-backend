@@ -1,5 +1,9 @@
-将识别好的 OCR 数据进行分组分块。
+## OCR 识别
 
-1. 运行脚本[./block_to_line.py](./block_to_line.py)文本块变为文本行。
-2. 运行脚本[./line_to_group.py](./line_to_group.py)文本行变为文本组。
-3. 运行脚本[./plt.py](./plt.py)进行文本组的绘制。
+运行 [./ocr.py](./ocr.py) 可以启动 OCR 识别的过程，注意修改参数 image_path 和 output_path。
+
+## OCR 结果处理
+
+将识别好的 OCR 数据进行分行分组。
+
+运行 [./main.py](./main.py)。
