@@ -60,6 +60,6 @@ def run_ocr(image_path, output_path="ocr_results.json"):
 
 
 if __name__ == "__main__":
-    image_path = "example.jpg"
+    image_path = "img/modern_cn.png"
     output_path = "ocr_results.json"
     run_ocr(image_path, output_path)
