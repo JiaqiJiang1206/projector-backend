@@ -60,5 +60,5 @@ def main(image_path):
 
 # 调用主流程
 if __name__ == "__main__":
-    image_path = "img/poster.png"  # 替换为你的图像路径
+    image_path = "img/modern_poster.jpg"  # 替换为你的图像路径
     main(image_path)
