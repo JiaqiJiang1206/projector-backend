@@ -23,7 +23,7 @@ def line_to_group(input_path, output_path, eps=250):
       bbox = item["bbox"]
       x_center = (bbox[0][0] + bbox[1][0]) / 2
       y_center = (bbox[0][1] + bbox[3][1]) / 2
-      coordinates.append([x_center, y_center])
+      coordinates.append([bbox[0][0], bbox[0][1]])
 
   coordinates = np.array(coordinates)
 

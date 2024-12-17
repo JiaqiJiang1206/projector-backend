@@ -3,7 +3,7 @@ from line_to_group import line_to_group
 from draw_group import draw_group
 
 def main():
-  poster = "modern"
+  poster = "modern_cn"
 
   ocr_results = f"json_results/{poster}_ocr_results.json"
   line_results = f"json_results/{poster}_line_results.json"
@@ -12,10 +12,10 @@ def main():
   source_img = f"img/poster_{poster}.jpg"
   output_img = f"{poster}_final_result.jpg"
   # 1. 将文本块合并为文本行
-  block_to_line(ocr_results, line_results, eps_y=10, eps_x=10)
+  block_to_line(ocr_results, line_results, eps_y=10, eps_x=100)
   
   # 2. 将文本行合并为文本组
-  line_to_group(line_results, group_results, eps=250)
+  line_to_group(line_results, group_results, eps=150)
   
   # 3. 可视化结果
   draw_group(group_results, output_img, source_img)
