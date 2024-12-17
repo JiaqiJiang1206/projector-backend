@@ -4,7 +4,7 @@ from sklearn.cluster import DBSCAN
 import os
 
 # 加载 OCR 结果
-with open("json_results/line_results_modern.json", "r", encoding="utf-8") as f:
+with open("json_results/line_results.json", "r", encoding="utf-8") as f:
     ocr_data = json.load(f)
 
 # 提取文本块的中心坐标和高度
@@ -52,7 +52,7 @@ for texts in grouped_texts.values():
     })
 
 # 保存结果为 JSON 文件
-output_path = "json_results/grouped_results.json"
+output_path = "json_results/grouped_results_nano.json"
 # 确保目标文件夹存在
 os.makedirs(os.path.dirname(output_path), exist_ok=True)
 with open(output_path, "w", encoding="utf-8") as f:
