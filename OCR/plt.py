@@ -6,8 +6,8 @@ with open("json_results/grouped_results.json", "r", encoding="utf-8") as f:
     grouped_data = json.load(f)
 
 # 图像尺寸设定（白色背景）
-image_width = 7000  # 根据海报文本范围设定
-image_height = 5000
+image_width = 5000  # 根据海报文本范围设定
+image_height = 7000
 background_color = (255, 255, 255)  # 白色背景
 font_color = (0, 0, 0)  # 黑色字体
 bbox_color = (255, 0, 0)  # 红色边框

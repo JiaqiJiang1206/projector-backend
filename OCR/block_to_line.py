@@ -1,9 +1,10 @@
 import json
 import numpy as np
 from sklearn.cluster import DBSCAN
+import os
 
 # 加载 OCR 结果
-with open("json_results/ocr_results.json", "r", encoding="utf-8") as f:
+with open("json_results/ocr_results_modern.json", "r", encoding="utf-8") as f:
     ocr_data = json.load(f)
 
 # 提取文本块的坐标和文本内容
@@ -50,7 +51,7 @@ for line in grouped_lines.values():
     for i in range(1, len(line)):
         block = line[i]
         # 判断水平间隔是否小于阈值（如当前文本块宽度的 0.5 倍）
-        if block["x_left"] - current_x_right < 50: #(block["x_right"] - block["x_left"]) * 0.5:
+        if block["x_left"] - current_x_right < 100: #(block["x_right"] - block["x_left"]) * 0.5:
             # 拼接文本
             merged_text += " " + block["text"]
             # 更新 bbox 范围（左右扩展）
@@ -74,7 +75,9 @@ for line in grouped_lines.values():
     })
 
 # 输出为新的 JSON 文件
-output_path = "json_results/line_results.json"
+output_path = "json_results/line_results_modern.json"
+# 确保目标文件夹存在
+os.makedirs(os.path.dirname(output_path), exist_ok=True)
 with open(output_path, "w", encoding="utf-8") as f:
     json.dump(processed_lines, f, ensure_ascii=False, indent=4)
 
