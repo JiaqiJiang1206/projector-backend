@@ -17,12 +17,12 @@ def line_to_group(input_path, output_path, eps=250):
   with open(input_path, "r", encoding="utf-8") as f:
       ocr_data = json.load(f)
 
-  # 提取文本块的中心坐标和高度
+  # 提取文本行的左上角坐标和高度
   coordinates = []
   for item in ocr_data:
       bbox = item["bbox"]
-      x_center = (bbox[0][0] + bbox[1][0]) / 2
-      y_center = (bbox[0][1] + bbox[3][1]) / 2
+    #   x_center = (bbox[0][0] + bbox[1][0]) / 2
+    #   y_center = (bbox[0][1] + bbox[3][1]) / 2
       coordinates.append([bbox[0][0], bbox[0][1]])
 
   coordinates = np.array(coordinates)
@@ -34,9 +34,10 @@ def line_to_group(input_path, output_path, eps=250):
   for idx, label in enumerate(clustering.labels_):
       if label not in grouped_texts:
           grouped_texts[label] = []
+    
       grouped_texts[label].append({
           "text": ocr_data[idx]["text"],
-          "bbox": ocr_data[idx]["bbox"]
+          "bbox": ocr_data[idx]["bbox"]     
       })
 
   # 合并文本和 bbox
@@ -52,11 +53,12 @@ def line_to_group(input_path, output_path, eps=250):
 
   # 处理每一组，拼接文本并合并 bbox
   grouped_sentences = []
-  for texts in grouped_texts.values():
+  for idx, texts in enumerate(grouped_texts.values(),start=1):
       texts = sorted(texts, key=lambda x: x["bbox"][0][1])  # 按 y 坐标排序
       merged_text = " ".join([t["text"] for t in texts])
       merged_bbox = merge_bboxes([t["bbox"] for t in texts])
       grouped_sentences.append({
+          "id":idx,
           "text": merged_text,
           "bbox": merged_bbox
       })

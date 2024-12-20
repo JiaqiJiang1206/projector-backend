@@ -49,3 +49,5 @@ def draw_group(group_json_path, output_path, image_path):
 
   # 可选：直接显示图像（需要环境支持 GUI）
   image.show()
+
+draw_group("ocr_results_with_word_bbox.json", "vis.jpg", "img/poster_modern_cn.jpg")
