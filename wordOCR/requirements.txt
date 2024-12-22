@@ -1,0 +1,7 @@
+tornado
+opencv_python
+onnxruntime
+Shapely
+pyclipper
+Pillow
+numpy==1.22.4
