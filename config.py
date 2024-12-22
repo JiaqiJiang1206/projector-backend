@@ -1,5 +1,5 @@
 
-apiKey = 'sk-4b4697c376c24264951f2b62ab1d01c3'
+apiKey = ''
 
 systemPromptPoster = '''
 
