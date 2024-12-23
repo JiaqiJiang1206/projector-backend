@@ -263,6 +263,23 @@ def modify_json(input_file, output_file):
     with open(output_file, 'w', encoding='utf-8') as file:
         json.dump(new_data_list, file, indent=4, ensure_ascii=False)
 
+def construct_only_group(input_file, output_file):
+    # 读取原始JSON文件
+    with open(input_file, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+
+    # 建立新的数据结构数组
+    new_data_list = []
+    for item in data:
+        new_item = {
+            "id": item["group_id"],
+            "text": item["text"]
+        }
+        new_data_list.append(new_item)
+
+    # 将修改后的数据数组写到新的JSON文件
+    with open(output_file, 'w', encoding='utf-8') as file:
+        json.dump(new_data_list, file, indent=4, ensure_ascii=False)
 
 if __name__ == "__main__":
     input_img_path = "images/0.png"
@@ -278,3 +295,7 @@ if __name__ == "__main__":
     # 绘制分组的 JSON 文件
     output_img_path = f"output/{os.path.basename(input_img_path).split('.')[0]}_vis.jpg"
     draw_group.draw_group(grouped_output_json, output_img_path, input_img_path)
+    # 将 group 中的 id 和 text 写到新的 JSON 文件中
+    only_group_output_json = f"output/{os.path.basename(input_img_path).split('.')[0]}_only_group.json"
+    construct_only_group(grouped_output_json, only_group_output_json)
+    
