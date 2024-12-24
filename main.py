@@ -3,20 +3,21 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
-from config import systemPromptPoster, systemPromptNumber
 from chatbot import ChatBot
 import uvicorn
 import sys
 import asyncio
 import os
+from search import Search
+from config import systemPromptPickerAgent
 
 # 将上一层文件夹添加到 Python 的搜索路径中
-sys.path.append(os.path.abspath('..'))
-from cosyvoice.cli.cosyvoice import CosyVoice
-from cosyvoice.utils.file_utils import load_wav
-import torchaudio
+# sys.path.append(os.path.abspath('..'))
+# from cosyvoice.cli.cosyvoice import CosyVoice
+# from cosyvoice.utils.file_utils import load_wav
+# import torchaudio
 
-cosyvoice = CosyVoice('../pretrained_models/CosyVoice-300M-SFT', load_jit=True, load_onnx=False, fp16=True)
+# cosyvoice = CosyVoice('../pretrained_models/CosyVoice-300M-SFT', load_jit=True, load_onnx=False, fp16=True)
 # sft usage
 # print(cosyvoice.list_avaliable_spks())
 
@@ -36,8 +37,7 @@ app.add_middleware(
 )
 
 # 初始化两个实例
-posterTalker = ChatBot(systemPrompt=systemPromptPoster)
-numChooser = ChatBot(systemPrompt=systemPromptNumber)
+PickerAgent = ChatBot(systemPrompt=systemPromptPickerAgent)
 
 class ChatRequest(BaseModel):
     content: str  # 用户当前输入的消息
@@ -52,12 +52,14 @@ class SendAudioRequest(BaseModel):
 @app.post("/api/chat/poster")
 async def chatPoster(request: ChatRequest):
   try:
-    # print(request)
-    posterTalker.add_user_message(request.content)
-    assistantOutput = posterTalker.get_reply()
+    print(request)
+    PickerAgent.add_user_message(request.content)
+    assistantOutput = PickerAgent.get_reply()
     print(assistantOutput)
+    output = Search(assistantOutput, '0_grouped.json')
+    print(output)
     # 返回模型的回复
-    return {"reply": assistantOutput}
+    return {"reply": output}
   except Exception as e:
       print(f"Error: {e}")
       raise HTTPException(status_code=500, detail="Failed to generate response")
