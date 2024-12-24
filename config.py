@@ -1,4 +1,3 @@
-apiKey = 'sk-da762947f89040b0895a6099f807bf62'
 
 #visualagentassistantid
 visualAgentAssistantId = '8862f98dcefd44209536ab67a5b6b713'
