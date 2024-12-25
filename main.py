@@ -4,12 +4,18 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from chatbot import ChatBot
+from chatbot import QwenAssistant
 import uvicorn
 import sys
 import asyncio
 import os
+import json
 from search import Search
 from config import systemPromptPickerAgent
+from config import systemPromptChat
+import dashscope
+from dashscope import Assistants, Messages, Runs, Threads
+
 
 # 将上一层文件夹添加到 Python 的搜索路径中
 # sys.path.append(os.path.abspath('..'))
@@ -23,6 +29,12 @@ from config import systemPromptPickerAgent
 
 # 加载环境变量
 load_dotenv()
+os.environ['DASHSCOPE_API_KEY'] = 'sk-da762947f89040b0895a6099f807bf62'
+visualAgentAssistantId = 'asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0'
+dashscope.api_key = "sk-da762947f89040b0895a6099f807bf62"
+assistant_id = 'asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0'
+workspace = 'llm-8iz1w0zj4paj6z85'
+api_key = 'sk-da762947f89040b0895a6099f807bf62'
 
 # 初始化 FastAPI 应用
 app = FastAPI()
@@ -36,8 +48,11 @@ app.add_middleware(
     allow_headers=["*"],  # 允许所有 HTTP 头
 )
 
-# 初始化两个实例
+# 初始化两个agent
 PickerAgent = ChatBot(systemPrompt=systemPromptPickerAgent)
+ChatAgent = ChatBot(systemPrompt=systemPromptChat)
+QwenAgent = QwenAssistant(assistant_id, workspace, api_key)
+
 
 class ChatRequest(BaseModel):
     content: str  # 用户当前输入的消息
@@ -47,22 +62,76 @@ class ChatAudioRequest(BaseModel):
 
 class SendAudioRequest(BaseModel):
     content: int  # 客户端要求语音文件的索引
+
+class PickerResponse(BaseModel):
+    content: str  # Picker 的回复
+
+class GeneratorResponse(BaseModel):
+    content1: str  # 用户语音输入的消息
+    content2: str  # picker的回复-rawoutput_picker
+    content3: str  # generator的回复-generator_output
+
+
    
-# 定义聊天接口
-@app.post("/api/chat/poster")
-async def chatPoster(request: ChatRequest):
+# 定义picker接口
+@app.post("/api/picker")
+async def highlightPicker(request: ChatRequest):
   try:
     print(request)
     PickerAgent.add_user_message(request.content)
     assistantOutput = PickerAgent.get_reply()
+    #
+    chat_input = ""
     print(assistantOutput)
     output = Search(assistantOutput, '0_grouped.json')
     print(output)
     # 返回模型的回复
-    return {"reply": output}
+    return {"rawoutput_picker": output[0],
+            "highlight_point": output[1]}
   except Exception as e:
       print(f"Error: {e}")
       raise HTTPException(status_code=500, detail="Failed to generate response")
+  
+#定义向前端请求picker回复并发送generator的输出
+@app.post("/api/pickertogenerator")
+async def pickertoGenerator(feedback: PickerResponse):
+    try:
+        print(f"Received feedback: {feedback.content}")
+        # 从前端接收到的 picker 输出
+        assistant_data = json.loads(feedback.content)
+        # 需要测测
+        description = assistant_data["Dialogue"]
+        generator_assistant = QwenAssistant(assistant_id, workspace, api_key)
+        generatoroutput = generator_assistant.send_message(description)
+        # 此处可以根据需求处理接收到的 rawoutput_picker
+        # 比如存储到数据库或再次处理
+        return {"generator_output": generatoroutput}
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to process feedback")
+
+#定义向前端请求picker回复并发送generator的输出
+@app.post("/api/generatortochat")
+async def generatortoChat(feedback: GeneratorResponse):
+    try:
+        # 从前端接收到的 picker 输出
+        input_chat = f"""
+        用户输入：{feedback.content1}
+
+        海报分析机器人输入：{feedback.content2}
+
+        知识点扩展机器人输入：{feedback.content3}
+        """
+        generator_assistant = QwenAssistant(assistant_id, workspace, api_key)
+        generatoroutput = generator_assistant.send_message(input_chat)
+        # 此处可以根据需求处理接收到的 rawoutput_picker
+        # 比如存储到数据库或再次处理
+        return {"generator_output": generatoroutput}
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to process feedback")
+
+
 
 #语音接口，开始生成语音数据
 @app.post("/api/chat/startaudio")
