@@ -92,19 +92,7 @@ class QwenAssistant:
 
 # # 1223 Chatbot tested
 # posterTalker = ChatBot(systemPrompt=systemPromptChat, model="qwen-turbo-latest")  
-"""
-用户输入：""" + content1 + """
 
-海报分析机器人输入：""" + content2 + """
-
-知识点扩展机器人输入：""" + content3 + """
-
-
-
-
-
-
-# content = """
 # 用户输入：介绍一下菲利普塔斯克的作品。
 
 # 海报分析机器人输入：
