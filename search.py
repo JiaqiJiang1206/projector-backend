@@ -5,9 +5,9 @@ import json
 def Search(assistant_output: str, json_database_path: str):
     # 将字符串解析为 JSON
     assistant_data = json.loads(assistant_output)
-    dialogue = assistant_data["Dialogue"]
+    description = assistant_data
     highlighted = assistant_data["highlighted"]
-    output = [dialogue]  # 初始化输出列表
+    output = [description]  # 初始化输出列表
     bbox_list = []  # 存储所有 bbox 数据
 
     # 加载数据库
@@ -32,7 +32,7 @@ def Search(assistant_output: str, json_database_path: str):
         else:
             # 如果是 "文本内容"，匹配关键词并处理跨行逻辑
             matched_bboxes = []
-            all_words = []  # 用于存储所有行的 `words` 数据
+            all_words = []  # 用于存储所有行的 words 数据
             for line in group_data.get("lines", []):
                 all_words.extend(line.get("words", []))  # 聚合所有行的 words
 
@@ -78,8 +78,6 @@ def Search(assistant_output: str, json_database_path: str):
 
 
 
-
-
 # posterTalker = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo-latest")  
 # content = """
 # 给我介绍一波罗恩阿拉德。
@@ -87,7 +85,7 @@ def Search(assistant_output: str, json_database_path: str):
 # posterTalker.add_user_message(content)
 # assistantOutput = posterTalker.get_reply()
 # print(assistantOutput)
-# output = search(assistantOutput, '0_grouped.json')
-# print(output)
+# output = Search(assistantOutput, '0_grouped.json')
+# print(output[1])
 
 
