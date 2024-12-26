@@ -82,7 +82,7 @@ class QwenAssistant:
 
 
 # posterContent = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo")
-# content = "介绍一下菲利普塔斯克的作品。"
+# content = "品牌还有什么"
 # posterContent.add_user_message(content)
 # assistantOutput = posterContent.get_reply()
 # print(assistantOutput)

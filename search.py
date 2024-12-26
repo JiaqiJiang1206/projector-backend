@@ -78,13 +78,15 @@ def Search(assistant_output: str, json_database_path: str):
 
 
 
-# posterTalker = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo-latest")  
+# posterTalker = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo")  
 # content = """
-# 给我介绍一波罗恩阿拉德。
+# 品牌崛起还有什么。
 # """
 # posterTalker.add_user_message(content)
 # assistantOutput = posterTalker.get_reply()
 # print(assistantOutput)
+
+
 # output = Search(assistantOutput, '0_grouped.json')
 # print(output[1])
 
