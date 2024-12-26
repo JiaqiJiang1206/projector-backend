@@ -175,8 +175,8 @@ class QwenAssistant:
 
 
 
-# # 1223 QwenAssistant tested
-# # 创建实例
+# 1223 QwenAssistant tested
+# 创建实例
 # assistant_id = 'asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0'
 # workspace = 'llm-8iz1w0zj4paj6z85'
 # api_key = 'sk-da762947f89040b0895a6099f807bf62'
@@ -184,5 +184,5 @@ class QwenAssistant:
 # generator_assistant = QwenAssistant(assistant_id, workspace, api_key)
 
 # # 调用方法
-# a = generator_assistant.send_message('孟菲斯运动是由埃托雷·索特萨斯在1980年代初推广的，旨在打破传统设计界限，强调色彩和材料的大胆运用。它以鲜艳的色彩和独特的形式著称，这些设计作品让我们重新思考了日常物品的美学。')
+# a = generator_assistant.send_message('您好！请问您对后现代主义的哪个方面感兴趣？我们可以探讨其特点、相关运动如孟菲斯运动或新浪潮平面设计，以及它对品牌和国际设计的影响等。')
 # print(a)

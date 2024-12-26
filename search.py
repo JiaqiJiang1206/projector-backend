@@ -5,7 +5,7 @@ import json
 def Search(assistant_output: str, json_database_path: str):
     # 将字符串解析为 JSON
     assistant_data = json.loads(assistant_output)
-    description = assistant_data
+    description = assistant_data["Dialogue"]
     highlighted = assistant_data["highlighted"]
     output = [description]  # 初始化输出列表
     bbox_list = []  # 存储所有 bbox 数据
@@ -88,6 +88,6 @@ def Search(assistant_output: str, json_database_path: str):
 
 
 # output = Search(assistantOutput, '0_grouped.json')
-# print(output[1])
+# print(output)
 
 

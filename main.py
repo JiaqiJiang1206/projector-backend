@@ -16,6 +16,7 @@ import dashscope
 from search import Search
 from config import systemPromptPickerAgent
 from config import systemPromptChat
+from generatorhandle import GeneratorHandler
 
 # 将上一层文件夹添加到 Python 的搜索路径中
 sys.path.append(os.path.abspath('..'))
@@ -71,10 +72,10 @@ class SendAudioRequest(BaseModel):
 class PickerResponse(BaseModel):
     content: str  # Picker 的回复
 
-class GeneratorResponse(BaseModel):
-    user_input: str  # 用户语音输入的消息
-    picker_description: str  # picker的回复-rawoutput_picker
-    generator_output: str  # generator的回复-generator_output
+# class GeneratorResponse(BaseModel):
+#     user_input: str  # 用户语音输入的消息
+#     picker_description: str  # picker的回复-rawoutput_picker
+#     generator_output: str  # generator的回复-generator_output
 
 
    
@@ -93,7 +94,8 @@ async def highlightPicker(request: ChatRequest):
     print(2)
     print(output)
     # 返回模型的回复
-    return {"rawoutput_picker": output[0],
+    # 12262016
+    return {"picker_chatmessage": output[0],
             "highlight_point": output[1]}
   except Exception as e:
       print(f"Error: {e}")
@@ -108,36 +110,39 @@ async def pickertoGenerator(feedback: PickerResponse):
         # assistant_data = json.loads(feedback.content)
         # 需要测测
         description = feedback.content
-        generatoroutput = GeneratorAssistant.send_message(description)
+        generatormiddlemsg = GeneratorAssistant.send_message(description)
+        generatordraw, generatorchat = GeneratorHandler(generatormiddlemsg)
         # 此处可以根据需求处理接收到的 rawoutput_picker
         # 比如存储到数据库或再次处理
-        return {"generator_output": generatoroutput}
+
+        return {"generator_draw": generatordraw,
+                "generator_chat": generatorchat}
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Failed to process feedback")
 
-#定义向前端请求picker回复并发送generator的输出
-@app.post("/api/generatortochat")
-async def generatortoChat(feedback: GeneratorResponse):
-    try:
-        # 从前端接收到的 picker 输出
-        input_chat = f"""
-        用户输入：{feedback.user_input}
+# #定义向前端请求picker回复并发送generator的输出
+# @app.post("/api/generatortochat")
+# async def generatortoChat(feedback: GeneratorResponse):
+#     try:
+#         # 从前端接收到的 picker 输出
+#         input_chat = f"""
+#         用户输入：{feedback.user_input}
 
-        海报分析机器人输入：{feedback.picker_description}
+#         海报分析机器人输入：{feedback.picker_description}
 
-        知识点扩展机器人输入：{feedback.generator_output}
-        """
-        print(input_chat)
+#         知识点扩展机器人输入：{feedback.generator_output}
+#         """
+#         print(input_chat)
 
-        ChatAgent.add_user_message(input_chat)
-        generatoroutput = ChatAgent.get_reply()
-        # 此处可以根据需求处理接收到的 rawoutput_picker
-        # 比如存储到数据库或再次处理
-        return {"generator_output": generatoroutput}
-    except Exception as e:
-        print(f"Error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to process feedback")
+#         ChatAgent.add_user_message(input_chat)
+#         generatoroutput = ChatAgent.get_reply()
+#         # 此处可以根据需求处理接收到的 rawoutput_picker
+#         # 比如存储到数据库或再次处理
+#         return {"generator_output": generatoroutput}
+#     except Exception as e:
+#         print(f"Error: {e}")
+#         raise HTTPException(status_code=500, detail="Failed to process feedback")
 
 @app.post("/api/transcribe")
 async def transcribe_audio(
