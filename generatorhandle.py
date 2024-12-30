@@ -3,7 +3,7 @@ import json
 def GeneratorHandler(input_json):
     try:
         # 将 JSON 字符串解析为字典
-        input_json = json.loads(json_string)
+        input_json = json.loads(input_json)
         
         # 提取 return1 和 return2
         return1 = {

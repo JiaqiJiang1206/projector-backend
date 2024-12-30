@@ -1,7 +1,6 @@
 from openai import OpenAI
 from config import systemPromptSemanticAgent
 from config import systemPromptPickerAgent
-from config import systemPromptChat
 import os
 from dotenv import load_dotenv
 from dashscope import Assistants, Messages, Runs, Threads

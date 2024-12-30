@@ -27,17 +27,17 @@ api_key = 'sk-da762947f89040b0895a6099f807bf62'
 
 
 
-# assistant = Assistants.retrieve('asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0')
-# print(assistant)
+# # assistant = Assistants.retrieve('asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0')
+# # print(assistant)
 
 
-# 修改Assistant
-# assistants = Assistants.update('asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0', model='qwen-plus', instructions= '''
-# You are an assistant that generates structured JSON for visualizing input text. 
-# You should first expand the user input based on the provided files(content.json&amp;image.json), and then generate the JSON output according to the expanded text. 
-# Please extract key infomation from the expanded text and match these key infomation with the provided files(content.json&amp;image.json), then organize the matched information into two fields: keyinfo and connections.
-# Keep the number of nodes between 2 and 4.
-# Finally, based on the content of the nodes you’ve generated, create a logical and concise introduction to explain the nodes to the user. Conclude with a simple invitation for them to continue discussing topics related to postmodernism in design history with you. Aim for around 100 words, ensuring the language is natural, clear, and easy to understand.
+# # # 修改Assistant
+# # assistants = Assistants.update('asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0', model='qwen-plus', instructions= '''
+# # You are an assistant that generates structured JSON for visualizing input text. 
+# # You should first expand the user input based on the provided files(content.json&amp;image.json), and then generate the JSON output according to the expanded text. 
+# # Please extract key infomation from the expanded text and match these key infomation with the provided files(content.json&amp;image.json), then organize the matched information into two fields: keyinfo and connections.
+# # Keep the number of nodes between 2 and 4.
+# # Finally, based on the content of the nodes you’ve generated, create a logical and concise introduction to explain the nodes to the user. Conclude with a simple invitation for them to continue discussing topics related to postmodernism in design history with you. Aim for around 50 words, ensuring the language is natural, clear, and easy to understand.
 
 
 

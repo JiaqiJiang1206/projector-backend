@@ -15,7 +15,6 @@ import torch
 import dashscope
 from search import Search
 from config import systemPromptPickerAgent
-from config import systemPromptChat
 from generatorhandle import GeneratorHandler
 
 # 将上一层文件夹添加到 Python 的搜索路径中
@@ -96,7 +95,8 @@ async def highlightPicker(request: ChatRequest):
     # 返回模型的回复
     # 12262016
     return {"picker_chatmessage": output[0],
-            "highlight_point": output[1]}
+            "highlight_point": output[1],
+            "emotion_number": output[2],}
   except Exception as e:
       print(f"Error: {e}")
       raise HTTPException(status_code=500, detail="Failed to generate response")
@@ -116,7 +116,8 @@ async def pickertoGenerator(feedback: PickerResponse):
         # 比如存储到数据库或再次处理
 
         return {"generator_draw": generatordraw,
-                "generator_chat": generatorchat}
+                "generator_chat": generatorchat,
+                }
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Failed to process feedback")
