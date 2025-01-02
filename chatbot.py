@@ -7,8 +7,8 @@ from dashscope import Assistants, Messages, Runs, Threads
 
 # 加载环境变量
 load_dotenv()
-apiKey = os.getenv("API_KEY")
-visualAgentAssistantId = os.getenv("visualAgentAssistantId")
+apiKey = os.getenv("sk-da762947f89040b0895a6099f807bf62")
+visualAgentAssistantId = os.getenv("asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0")
 
 class ChatBot:
   def __init__(self, systemPrompt, model: str = "qwen-turbo-latest") -> None:
@@ -80,11 +80,11 @@ class QwenAssistant:
 
 
 
-# posterContent = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo")
-# content = "品牌还有什么"
-# posterContent.add_user_message(content)
-# assistantOutput = posterContent.get_reply()
-# print(assistantOutput)
+posterContent = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo")
+content = "新浪潮平面设计的特点是什么？"
+posterContent.add_user_message(content)
+assistantOutput = posterContent.get_reply()
+print(assistantOutput)
 
 
 # # 1223 Chatbot tested

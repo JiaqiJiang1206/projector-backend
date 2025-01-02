@@ -7,14 +7,9 @@ def Search(assistant_output: str, json_database_path: str):
     assistant_data = json.loads(assistant_output)
     description = assistant_data["Dialogue"]
     highlighted = assistant_data["highlighted"]
-    emotions = assistant_data["Emotion"]  # 获取 Emotion 部分
+    emotion = assistant_data["Emotion"]  # 直接获取字符串格式的 Emotion
     output = [description]  # 初始化输出列表
     bbox_list = []  # 存储所有 bbox 数据
-    emotion_values = []  # 用于存储 emotion 数字（保留原始格式）
-
-    # 提取 Emotion 数值并保留字符串格式
-    for emotion_entry in emotions:
-        emotion_values.extend(emotion_entry["emotion"])
 
     # 加载数据库
     with open(json_database_path, 'r', encoding='utf-8') as f:
@@ -80,21 +75,21 @@ def Search(assistant_output: str, json_database_path: str):
                 print(f"No matching keywords found for group_id={group_id}.")
 
     output.append(bbox_list)
-    output.append(emotion_values)  # 添加 Emotion 数值列表
+    output.append(emotion)  # 直接添加字符串格式的 Emotion
     return output
 
 
-# posterTalker = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo")  
-# content = """
-# 品牌崛起还有什么。
-# 严格按照要求的json格式输出
-# """
-# posterTalker.add_user_message(content)
-# assistantOutput = posterTalker.get_reply()
-# print(assistantOutput)
+posterTalker = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo")  
+content = """
+品牌崛起还有什么。
+严格按照要求的json格式输出
+"""
+posterTalker.add_user_message(content)
+assistantOutput = posterTalker.get_reply()
+print(assistantOutput)
 
 
-# output = Search(assistantOutput, '0_grouped.json')
-# print(output)
+output = Search(assistantOutput, '0_grouped.json')
+print(output)
 
 
