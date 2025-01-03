@@ -16,6 +16,8 @@ import torch
 import dashscope
 from pickerhandle import Search
 from generatorhandle import GeneratorHandler
+import datetime
+import json
 
 # 将上一层文件夹添加到 Python 的搜索路径中
 sys.path.append(os.path.abspath('..'))
@@ -84,63 +86,85 @@ class SayHello(BaseModel):
 #     picker_description: str  # picker的回复-rawoutput_picker
 #     generator_output: str  # generator的回复-generator_output
 
-
+def log_message(role: str, content: str):
+    data = []
+    if os.path.exists("chatlog.json"):
+        with open("chatlog.json", "r", encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+            except:
+                data = []
+    data.append({
+        "role": role,
+        "timestamp": datetime.datetime.now().isoformat(),
+        "content": content
+    })
+    with open("chatlog.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
 
 @app.post("/api/sayhello")
 async def say_hello(request: SayHello):
-  try:
-    if request.poster == 1:
-        PickerAgent = PickerAgent1
-    elif request.poster == 2:
-        PickerAgent = PickerAgent2
-    else:
-        PickerAgent = PickerAgent2
-    print(request)
-    PickerAgent.add_user_message(request.content)
-    assistantOutput = PickerAgent.get_reply()
-    print(1)
-    print(assistantOutput)
-    output = Search(assistantOutput, '0_grouped.json')
-    print(2)
-    print(output)
-    return {"picker_chatmessage": output[0],
-            "highlight_point": output[1],
-            "emotion_number": output[2],}
-  except Exception as e:
-      print(f"Error: {e}")
-      raise HTTPException(status_code=500, detail="Failed to generate response")  
+    log_message("user", f"{request.model_dump()}")
+    try:
+        if request.poster == 1:
+            PickerAgent = PickerAgent1
+            path = 'eval1_grouped.json'
+        elif request.poster == 2:
+            PickerAgent = PickerAgent2
+            path = 'eval2_grouped.json'
+        else:
+            PickerAgent = PickerAgent2
+            path = 'eval3_grouped.json'
+        print(request)
+        PickerAgent.add_user_message(request.content)
+        assistantOutput = PickerAgent.get_reply()
+        print(1)
+        print(assistantOutput)
+        output = Search(assistantOutput, path)
+        print(2)
+        print(output)
+        result = {"picker_chatmessage": output[0],
+                "highlight_point": output[1],
+                "emotion_number": output[2],}
+        log_message("system", f"{result}")
+        return result
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to generate response")  
    
 # 定义picker接口
 @app.post("/api/picker")
 async def highlightPicker(request: ChatRequest):
-  try:
-    if request.poster == 1:
-        PickerAgent = PickerAgent1
-    elif request.poster == 2:
-        PickerAgent = PickerAgent2
-    else:
-        PickerAgent = PickerAgent2
-    print(request)
-    PickerAgent.add_user_message(request.content)
-    assistantOutput = PickerAgent.get_reply()
-    print(1)
-    print(assistantOutput)
-    output = Search(assistantOutput, '0_grouped.json')
-    print(2)
-    print(output)
-    # 返回模型的回复
-    # 12262016
-    return {"picker_chatmessage": output[0],
-            "highlight_point": output[1],
-            "emotion_number": output[2],}
-  except Exception as e:
-      print(f"Error: {e}")
-      raise HTTPException(status_code=500, detail="Failed to generate response")
+    log_message("user", f"{request.dict()}")
+    try:
+        if request.poster == 1:
+            PickerAgent = PickerAgent1
+        elif request.poster == 2:
+            PickerAgent = PickerAgent2
+        else:
+            PickerAgent = PickerAgent2
+        print(request)
+        PickerAgent.add_user_message(request.content)
+        assistantOutput = PickerAgent.get_reply()
+        print(1)
+        print(assistantOutput)
+        output = Search(assistantOutput, '0_grouped.json')
+        print(2)
+        print(output)
+        result = {"picker_chatmessage": output[0],
+                "highlight_point": output[1],
+                "emotion_number": output[2],}
+        log_message("system", f"{result}")
+        return result
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to generate response")
 
 #定义向前端请求picker回复并发送generator的输出
 @app.post("/api/pickertogenerator")
 async def pickertoGenerator(feedback: PickerResponse):
+    log_message("user", f"{feedback.dict()}")
     try:
         print(f"Received feedback: {feedback.content}")
         # 从前端接收到的 picker 输出
@@ -152,9 +176,10 @@ async def pickertoGenerator(feedback: PickerResponse):
         # 此处可以根据需求处理接收到的 rawoutput_picker
         # 比如存储到数据库或再次处理
 
-        return {"generator_draw": generatordraw,
-                "generator_chat": generatorchat,
-                }
+        result = {"generator_draw": generatordraw,
+                "generator_chat": generatorchat,}
+        log_message("system", f"{result}")
+        return result
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Failed to process feedback")
