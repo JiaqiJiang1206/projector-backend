@@ -247,7 +247,7 @@ def modify_json(input_file, output_file):
         data = json.load(file)
 
     # 获取 list
-    image_data_list = data.get("images/eval3.png", [])
+    image_data_list = data.get("images/eval1.png", [])
 
     # 建立新的数据结构数组
     new_data_list = []
@@ -282,7 +282,7 @@ def construct_only_group(input_file, output_file):
         json.dump(new_data_list, file, indent=4, ensure_ascii=False)
 
 if __name__ == "__main__":
-    input_img_path = "images/eval3.png"
+    input_img_path = "images/eval1.png"
     # 基于当前输入图片的文件名，生成输出 JSON 文件的文件名，并且表示出保存的是原始数据
     raw_output_json = f"output/{os.path.basename(input_img_path).split('.')[0]}_raw_char.json"
     get_char([input_img_path], raw_output_json)

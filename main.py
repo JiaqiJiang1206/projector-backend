@@ -114,7 +114,7 @@ async def say_hello(request: SayHello):
             PickerAgent = PickerAgent2
             path = 'eval2_grouped.json'
         else:
-            PickerAgent = PickerAgent2
+            PickerAgent = PickerAgent3
             path = 'eval3_grouped.json'
         print(request)
         PickerAgent.add_user_message(request.content)
@@ -145,7 +145,7 @@ async def highlightPicker(request: ChatRequest):
             PickerAgent = PickerAgent2
             path = 'eval2_grouped.json'
         else:
-            PickerAgent = PickerAgent2
+            PickerAgent = PickerAgent3
             path = 'eval3_grouped.json'
         print(request)
         PickerAgent.add_user_message(request.content)
