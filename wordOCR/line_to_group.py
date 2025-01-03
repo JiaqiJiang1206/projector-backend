@@ -37,7 +37,8 @@ def line_to_group(file_list, output_path, eps=250):
       bbox = item["bbox"]
       coordinates.append([int(bbox[0][0]), int(bbox[0][1])])
 
-    coordinates = np.array(coordinates)
+    # 过滤其中所有的空数组
+    coordinates = np.array([coord for coord in coordinates if coord])
 
     # 使用DBSCAN聚类算法对文本块进行分组
     clustering = DBSCAN(eps, min_samples=1).fit(coordinates)

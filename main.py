@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 from chatbot import ChatBot
 from chatbot import QwenAssistant
+from config import systemPromptPickerAgent1, systemPromptPickerAgent2, systemPromptPickerAgent3
 import uvicorn
 import sys
 import asyncio
@@ -13,8 +14,7 @@ import os
 import whisper
 import torch
 import dashscope
-from search import Search
-from config import systemPromptPickerAgent
+from pickerhandle import Search
 from generatorhandle import GeneratorHandler
 
 # 将上一层文件夹添加到 Python 的搜索路径中
@@ -54,12 +54,16 @@ app.add_middleware(
 )
 
 # 初始化两个agent
-PickerAgent = ChatBot(systemPrompt=systemPromptPickerAgent,model='qwen-plus')
+PickerAgent1 = ChatBot(systemPrompt=systemPromptPickerAgent1,model='qwen-turbo')
+PickerAgent2 = ChatBot(systemPrompt=systemPromptPickerAgent2,model='qwen-turbo')
+PickerAgent3 = ChatBot(systemPrompt=systemPromptPickerAgent3,model='qwen-turbo')
+
 GeneratorAssistant = QwenAssistant(assistant_id, workspace, api_key)
 
 
 class ChatRequest(BaseModel):
     content: str  # 用户当前输入的消息
+    poster: int  # 海报的ID
 
 class ChatAudioRequest(BaseModel):
     content: str  # 客户端要求转为语音的消息
@@ -72,15 +76,26 @@ class PickerResponse(BaseModel):
 
 class SayHello(BaseModel):
     content: str  # 客户端
+    poster: int
+
 
 # class GeneratorResponse(BaseModel):
 #     user_input: str  # 用户语音输入的消息
 #     picker_description: str  # picker的回复-rawoutput_picker
 #     generator_output: str  # generator的回复-generator_output
 
+
+
+
 @app.post("/api/sayhello")
 async def say_hello(request: SayHello):
   try:
+    if request.poster == 1:
+        PickerAgent = PickerAgent1
+    elif request.poster == 2:
+        PickerAgent = PickerAgent2
+    else:
+        PickerAgent = PickerAgent2
     print(request)
     PickerAgent.add_user_message(request.content)
     assistantOutput = PickerAgent.get_reply()
@@ -100,11 +115,15 @@ async def say_hello(request: SayHello):
 @app.post("/api/picker")
 async def highlightPicker(request: ChatRequest):
   try:
+    if request.poster == 1:
+        PickerAgent = PickerAgent1
+    elif request.poster == 2:
+        PickerAgent = PickerAgent2
+    else:
+        PickerAgent = PickerAgent2
     print(request)
     PickerAgent.add_user_message(request.content)
     assistantOutput = PickerAgent.get_reply()
-    #
-    chat_input = ""
     print(1)
     print(assistantOutput)
     output = Search(assistantOutput, '0_grouped.json')
