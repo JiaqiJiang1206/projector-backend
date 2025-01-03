@@ -55,7 +55,6 @@ app.add_middleware(
 
 # 初始化两个agent
 PickerAgent = ChatBot(systemPrompt=systemPromptPickerAgent,model='qwen-plus')
-ChatAgent = ChatBot(systemPrompt=systemPromptChat,model='qwen-turbo')
 GeneratorAssistant = QwenAssistant(assistant_id, workspace, api_key)
 
 
@@ -71,12 +70,31 @@ class SendAudioRequest(BaseModel):
 class PickerResponse(BaseModel):
     content: str  # Picker 的回复
 
+class SayHello(BaseModel):
+    content: str  # 客户端
+
 # class GeneratorResponse(BaseModel):
 #     user_input: str  # 用户语音输入的消息
 #     picker_description: str  # picker的回复-rawoutput_picker
 #     generator_output: str  # generator的回复-generator_output
 
-
+@app.post("/api/sayhello")
+async def say_hello(request: SayHello):
+  try:
+    print(request)
+    PickerAgent.add_user_message(request.content)
+    assistantOutput = PickerAgent.get_reply()
+    print(1)
+    print(assistantOutput)
+    output = Search(assistantOutput, '0_grouped.json')
+    print(2)
+    print(output)
+    return {"picker_chatmessage": output[0],
+            "highlight_point": output[1],
+            "emotion_number": output[2],}
+  except Exception as e:
+      print(f"Error: {e}")
+      raise HTTPException(status_code=500, detail="Failed to generate response")  
    
 # 定义picker接口
 @app.post("/api/picker")

@@ -79,17 +79,40 @@ def Search(assistant_output: str, json_database_path: str):
     return output
 
 
-posterTalker = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo")  
-content = """
-品牌崛起还有什么。
-严格按照要求的json格式输出
-"""
-posterTalker.add_user_message(content)
-assistantOutput = posterTalker.get_reply()
-print(assistantOutput)
+# posterTalker = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo")  
+# content = """
+# 品牌崛起还有什么。
+# 严格按照要求的json格式输出
+# """
+# posterTalker.add_user_message(content)
+# assistantOutput = """
+# {
+#   "highlighted": [
+#     {
+#       "id": 6,
+#       "text": "新浪潮平面设计",
+#       "type": "小主题"
+#     },
+#     {
+#       "id": 7,
+#       "text": "新浪潮平面设计起源于反对瑞士现代主义的传统阴 格结构。设计师通过利用层次和丰富的图像参考来 打破常规，增加互动性及动态的视觉效果，这使得 新波设计更具活力和趣味性。这样一种设计风格被 广泛应用于广告、音乐海报和主流媒体中，增强了 观众的视觉参与感",
+#       "type": "文本内容",
+#       "keywords": ["瑞士现代主义", "层次", "图像参考", "打破常规", "互动性"]
+#     },
+#     {
+#       "id": 8,
+#       "text": "彼得.夏尔于1984年左右设计的秘泉桌体现了加州新 浪潮设计风格。",
+#       "type": "图片描述"
+#     }
+#   ],
+#   "Dialogue": "新浪潮平面设计真的很有趣！它打破了传统的设计规则，加入了更多互动性和动态元素，让设计更加生动有趣。你看彼得·夏尔设计的‘秘泉’桌，是不是充满了创意？你觉得这种设计风格在当今数字化时代会有什么新的发展呢？右边还有一些扩展内容，可以让你了解更多关于这个时期的创新设计。",
+#   "Emotion": "00"
+# }
+# """
+# # print(assistantOutput)
 
 
-output = Search(assistantOutput, '0_grouped.json')
-print(output)
+# output = Search(assistantOutput, '0_grouped.json')
+# print(output)
 
 

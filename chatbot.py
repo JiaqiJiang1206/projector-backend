@@ -80,11 +80,11 @@ class QwenAssistant:
 
 
 
-posterContent = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo")
-content = "新浪潮平面设计的特点是什么？"
-posterContent.add_user_message(content)
-assistantOutput = posterContent.get_reply()
-print(assistantOutput)
+# posterContent = ChatBot(systemPrompt=systemPromptPickerAgent, model="qwen-turbo")
+# content = "新浪潮平面设计的特点是什么？"
+# posterContent.add_user_message(content)
+# assistantOutput = posterContent.get_reply()
+# print(assistantOutput)
 
 
 # # 1223 Chatbot tested
