@@ -1,6 +1,6 @@
 from openai import OpenAI
 from config import systemPromptSemanticAgent
-# from config import systemPromptPickerAgent
+from config import systemPromptPickerAgent1, systemPromptPickerAgent2, systemPromptPickerAgent3
 import os
 from dotenv import load_dotenv
 from dashscope import Assistants, Messages, Runs, Threads
@@ -166,9 +166,9 @@ keywords必须是Poster Content中存在的词，不要无中生有，也不要�
 你的输出需要严格按照json格式输出，并考虑到可能的转义字符问题，不要在字符串中再包含英文引号，以防json解析失败。
 
 '''
-posterContent.add_user_message(content)
-assistantOutput = posterContent.get_reply()
-print(assistantOutput)
+# posterContent.add_user_message(content)
+# assistantOutput = posterContent.get_reply()
+# print(assistantOutput)
 
 
 # # QwenAssistant 测试

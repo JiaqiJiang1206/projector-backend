@@ -140,16 +140,19 @@ async def highlightPicker(request: ChatRequest):
     try:
         if request.poster == 1:
             PickerAgent = PickerAgent1
+            path = 'eval1_grouped.json'
         elif request.poster == 2:
             PickerAgent = PickerAgent2
+            path = 'eval2_grouped.json'
         else:
             PickerAgent = PickerAgent2
+            path = 'eval3_grouped.json'
         print(request)
         PickerAgent.add_user_message(request.content)
         assistantOutput = PickerAgent.get_reply()
         print(1)
         print(assistantOutput)
-        output = Search(assistantOutput, '0_grouped.json')
+        output = Search(assistantOutput, path)
         print(2)
         print(output)
         result = {"picker_chatmessage": output[0],

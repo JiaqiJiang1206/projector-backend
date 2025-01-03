@@ -1,4 +1,4 @@
-from config import systemPromptPickerAgent
+from config import systemPromptPickerAgent1, systemPromptPickerAgent2, systemPromptPickerAgent3
 from chatbot import ChatBot
 import json
 
