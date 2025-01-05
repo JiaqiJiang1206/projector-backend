@@ -59,6 +59,9 @@ app.add_middleware(
 PickerAgent1 = ChatBot(systemPrompt=systemPromptPickerAgent1,model='qwen-turbo')
 PickerAgent2 = ChatBot(systemPrompt=systemPromptPickerAgent2,model='qwen-turbo')
 PickerAgent3 = ChatBot(systemPrompt=systemPromptPickerAgent3,model='qwen-turbo')
+PickerAgent4 = ChatBot(systemPrompt=systemPromptPickerAgent1,model='qwen-turbo')
+PickerAgent5 = ChatBot(systemPrompt=systemPromptPickerAgent2,model='qwen-turbo')
+PickerAgent6 = ChatBot(systemPrompt=systemPromptPickerAgent3,model='qwen-turbo')
 
 GeneratorAssistant = QwenAssistant(assistant_id, workspace, api_key)
 
@@ -108,13 +111,13 @@ async def say_hello(request: SayHello):
     log_message("user", f"{request.model_dump()}")
     try:
         if request.poster == 1:
-            PickerAgent = PickerAgent1
+            PickerAgent = PickerAgent4
             path = 'eval1_grouped.json'
         elif request.poster == 2:
-            PickerAgent = PickerAgent2
+            PickerAgent = PickerAgent5
             path = 'eval2_grouped.json'
         else:
-            PickerAgent = PickerAgent3
+            PickerAgent = PickerAgent6
             path = 'eval3_grouped.json'
         print(request)
         PickerAgent.add_user_message(request.content)
