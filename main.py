@@ -128,8 +128,10 @@ async def say_hello(request: SayHello):
         print(2)
         print(output)
         result = {"picker_chatmessage": output[0],
-                "highlight_point": output[1],
-                "emotion_number": output[2],}
+                "title": output[1],
+                "highlight_point": output[2],
+                "caption": output[3],
+                "emotion_number": output[4]}
         log_message("system", f"{result}")
         return result
     except Exception as e:
@@ -159,8 +161,10 @@ async def highlightPicker(request: ChatRequest):
         print(2)
         print(output)
         result = {"picker_chatmessage": output[0],
-                "highlight_point": output[1],
-                "emotion_number": output[2],}
+                "title": output[1],
+                "highlight_point": output[2],
+                "caption": output[3],
+                "emotion_number": output[4]}
         log_message("system", f"{result}")
         return result
     except Exception as e:
