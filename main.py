@@ -178,6 +178,7 @@ async def pickertoGenerator(feedback: PickerResponse):
         # 需要测测
         description = feedback.content
         generatormiddlemsg = GeneratorAssistant.send_message(description)
+        print(generatormiddlemsg)
         generatordraw, generatorchat = GeneratorHandler(generatormiddlemsg)
         # 此处可以根据需求处理接收到的 rawoutput_picker
         # 比如存储到数据库或再次处理

@@ -12,7 +12,7 @@ os.environ['DASHSCOPE_API_KEY'] = 'sk-da762947f89040b0895a6099f807bf62'
 dashscope.api_key = "sk-da762947f89040b0895a6099f807bf62"
 
 
-# 这里查看assistant的参数信息
+# # # 这里查看assistant的参数信息
 # assistants = Assistants.update('asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0', model='qwen-max', instructions= '''
 # 你是一个助手，负责生成用于可视化输入文本的结构化 JSON。
 # 你需要首先根据用户输入，基于提供的文件（content.txt 和 image.txt）和你的设计历史常识扩展用户输入，使得扩展内容包含更多丰富的设计历史事件、作品、设计师等。然后根据扩展后的文本生成 JSON 输出。用户输入约100字，你的扩展内容约250字。
@@ -76,9 +76,11 @@ dashscope.api_key = "sk-da762947f89040b0895a6099f807bf62"
 # 基于提供的文档扩展用户输入，然后从扩展后的内容生成 JSON，而不是直接从用户输入生成 JSON。
 # 仅以所请求的 JSON 输出作答，严格遵守上述要求，不包含任何无关信息。
 # 生成image必须仔细思考image的描述是否与该节点相关，确保image与description说的是同一个东西，否则不要生成image。                               
-# 如果在 image.txt 和 content.txt 中找不到任何相关信息，请不要编造描述，直接留空。
-# 请仅以纯文本作答，确保答案中不包含任何代码格式或代码块（例如 ```json）。                      
+# 如果在 image.txt 和 content.txt 中找不到任何相关信息，请不要编造描述，直接留空。不要生成不符合事实的信息。
+# 确保每次不要生成两张相同的图片，确保每张图片只在一个节点中出现。
+# 请仅以纯文本作答，确保答案中不包含任何代码格式或代码块（例如 ```json）。 
 
+                    
 # # 知识库
 # 请记住以下材料，他们可能对回答问题有帮助。
 # ${documents}''')
