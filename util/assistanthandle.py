@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import dashscope
+from dashscope import Assistants
 
 # 这个脚本是操作生成思维导图的assistant的脚本，只有在需要修改的时候才可以把修改assistant的代码取消注释然后运行。其他时候不用管。
 # qwen的assistant和其他chatbot的创建逻辑不太一样。类似于openai的assistant，但没有现成的playground界面，所以只能在代码里修改prompt等参数。
@@ -11,19 +12,19 @@ os.environ['DASHSCOPE_API_KEY'] = 'sk-da762947f89040b0895a6099f807bf62'
 dashscope.api_key = "sk-da762947f89040b0895a6099f807bf62"
 
 
-# # 这里查看assistant的参数信息
+# # # 这里查看assistant的参数信息
 # assistant = Assistants.retrieve('asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0')
 # print(assistant)
 
 
-# # 这里修改Assistant的参数
-# assistants = Assistants.update('asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0', model='qwen-plus', instructions= '''
+# 这里修改Assistant的参数
+# assistants = Assistants.update('asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0', model='qwen-turbo', instructions= '''
 # You are an assistant that generates structured JSON for visualizing input text. 
 # You should first expand the user input based on the provided files(content.json&amp;image.json), and then generate the JSON output according to the expanded text. 
 # Please extract key infomation from the expanded text and match these key infomation with the provided files(content.json&amp;image.json), then organize the matched information into two fields: keyinfo and connections.
 # Keep the number of nodes between 2 and 4.
 # Finally, based on the content of the nodes you’ve generated, create a logical and concise introduction to explain the nodes to the user. Conclude with a simple invitation for them to continue discussing topics related to postmodernism in design history with you. Aim for around 50 words, ensuring the language is natural, clear, and easy to understand.
-
+# Generate images as much as possible. The image shoud be related to the description and keywords.
 
 
 # Example:
@@ -106,7 +107,7 @@ dashscope.api_key = "sk-da762947f89040b0895a6099f807bf62"
 # - Expand the user input based on the provided document, then generate JSON from the expanded content instead of directly --generating JSON from the user input.
 # - Respond only with the requested JSON output only, adhering to the above requirements and do not contain any irrelevent messages.
 # - If you can not find any relevant infomation in image.json nor content.json, do not make fake descriptions, just leave it empty.
-# Please respond in plain text only. Make sure the answer does not include any code formatting or blocks, such as ```json.
+# - Please respond in plain text only. Make sure the answer does not include any code formatting or blocks, such as ```json.
 
 
 # # 知识库

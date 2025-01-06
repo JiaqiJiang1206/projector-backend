@@ -139,7 +139,7 @@ async def say_hello(request: SayHello):
 # 定义picker接口
 @app.post("/api/picker")
 async def highlightPicker(request: ChatRequest):
-    log_message("user", f"{request.dict()}")
+    log_message("user", f"{request.model_dump()}")
     try:
         if request.poster == 1:
             PickerAgent = PickerAgent1
@@ -170,7 +170,7 @@ async def highlightPicker(request: ChatRequest):
 #定义向前端请求picker回复并发送generator的输出
 @app.post("/api/pickertogenerator")
 async def pickertoGenerator(feedback: PickerResponse):
-    log_message("user", f"{feedback.dict()}")
+    log_message("user", f"{feedback.model_dump()}")
     try:
         print(f"Received feedback: {feedback.content}")
         # 从前端接收到的 picker 输出
