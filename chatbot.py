@@ -1,14 +1,17 @@
-from openai import OpenAI
+from open import OpenAI
 from config import systemPromptSemanticAgent
 from config import systemPromptPickerAgent1, systemPromptPickerAgent2, systemPromptPickerAgent3
 import os
 from dotenv import load_dotenv
 from dashscope import Assistants, Messages, Runs, Threads
+import dashscope
 
 # 加载环境变量
 load_dotenv()
-apiKey = os.getenv("sk-da762947f89040b0895a6099f807bf62")
-visualAgentAssistantId = os.getenv("asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0")
+assistant_id = 'asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0'
+workspace = os.getenv("WORKSPACE")
+api_key = "sk-da762947f89040b0895a6099f807bf62"
+dashscope.api_key = api_key
 
 class ChatBot:
   def __init__(self, systemPrompt, model: str = "qwen-turbo-latest") -> None:
@@ -78,88 +81,196 @@ class QwenAssistant:
 
         return latest_output  # 返回最新的输出
 
+# client = OpenAI()
+
+# def get_ai_reply(user_message):
+#     """
+#     与 OpenAI Assistant 交互并获取回复的函数。
+    
+#     参数:
+#         user_message (str): 用户发送的消息。
+    
+#     返回:
+#         dict: 包含 AI 回复的解析数据。
+#     """
+#     try:
+#         # 从 Playground 中调用助手
+#         assistant = client.beta.assistants.retrieve("asst_YpyxHD5eDY3bmbUqJhDSV0Ij")
+
+#         # 创建线程
+#         thread = client.beta.threads.create()
+
+#         # 向线程发送用户消息
+#         client.beta.threads.messages.create(
+#             thread_id=thread.id,
+#             role="user",
+#             content=user_message
+#         )
+
+#         # 启动并轮询运行
+#         run = client.beta.threads.runs.create_and_poll(
+#             thread_id=thread.id,
+#             assistant_id=assistant.id,
+#             instructions=""
+#         )
+
+#         if run.status == 'completed':
+#             # 获取线程消息
+#             messages = client.beta.threads.messages.list(thread_id=thread.id)
+
+#             # 提取 AI 回复
+#             for message in messages.data:
+#                 if message.role == 'assistant':  # 只提取 AI 回复
+#                     raw_reply = message.content[0].text.value  # 获取文本内容
+#                     return raw_reply  # 返回解析后的数据
+#         else:
+#             return {"error": f"AI 运行未完成，状态: {run.status}"}
+
+#     except Exception as e:
+#         # 捕获并返回任何错误
+#         return {"error": str(e)}
+
+class Assistantbot:
+    def __init__(self, client, assistant_id):
+        """
+        初始化与 OpenAI Assistant 的交互。
+
+        参数:
+            client (object): 用于与 OpenAI API 进行交互的客户端。
+            assistant_id (str): OpenAI Assistant 的 ID。
+        """
+        self.client = client
+        self.assistant_id = assistant_id
+
+    def get_ai_reply(self, user_message):
+        """
+        与 OpenAI Assistant 交互并获取回复。
+
+        参数:
+            user_message (str): 用户发送的消息。
+
+        返回:
+            dict: 包含 AI 回复的解析数据。
+        """
+        try:
+            # 从 Playground 中调用助手
+            assistant = self.client.beta.assistants.retrieve(self.assistant_id)
+
+            # 创建线程
+            thread = self.client.beta.threads.create()
+
+            # 向线程发送用户消息
+            self.client.beta.threads.messages.create(
+                thread_id=thread.id,
+                role="user",
+                content=user_message
+            )
+
+            # 启动并轮询运行
+            run = self.client.beta.threads.runs.create_and_poll(
+                thread_id=thread.id,
+                assistant_id=assistant.id,
+                instructions=""
+            )
+
+            if run.status == 'completed':
+                # 获取线程消息
+                messages = self.client.beta.threads.messages.list(thread_id=thread.id)
+
+                # 提取 AI 回复
+                for message in messages.data:
+                    if message.role == 'assistant':  # 只提取 AI 回复
+                        raw_reply = message.content[0].text.value  # 获取文本内容
+                        return raw_reply  
+            else:
+                return {"error": f"AI 运行未完成，状态: {run.status}"}
+
+        except Exception as e:
+            # 捕获并返回任何错误
+            return {"error": str(e)}
+
+
+
+# test
+# client = OpenAI()
+# GeneratorAssistant = Assistantbot(client, "asst_YpyxHD5eDY3bmbUqJhDSV0Ij")
+# reply = GeneratorAssistant.get_ai_reply("荷兰设计至今依然保持着其独特的风格和创新精神。除了Droog和Moooi，还有很多其他设计师和品牌在国际上享有盛誉。例如，Studio Job的作品以其大胆的色彩和复杂的图案闻名，而Marcel Wanders则以其浪漫和戏剧性的设计著称。这些设计师的作品继续在全球范围内产生影响。")
+# print(reply)
 
 # systemPromptPickerAgent 测试
 # posterContent = ChatBot(systemPrompt=systemPromptSemanticAgent, model="qwen-max-2024-09-19")
 # content = '''
 # 按照设计历史的海报主题19世纪90年代的设计历史内容设计的全球化浪潮，进行最贴近主题的分区，不要单纯按出现顺序分组。有的图片跟主题的id顺序不在一起，但你需要根据图片信息和你已知的设计历史的常识，来判断该图片最属于哪个小主题。
 
+# 海报内容：
 # [
 #     {
 #         "id": 0,
-#         "text": "理性与工艺的变革"
+#         "text": "设计的全球化浪潮"
 #     },
 #     {
 #         "id": 1,
-#         "text": "高技派风格的后示"
+#         "text": "全球设计明星的嘱起"
 #     },
 #     {
 #         "id": 2,
-#         "text": "高技派设计风格在1970年代兴起，其灵感源 于工业和技术的精简美学。建筑师如理查德 罗杰斯和诺曼-福斯特强调通过裸露的钢梁和 管道元素打造出功能至上的设计，这些作品不 仅实用，还极具视觉冲击力。此风格在室内设 计中延续，通过像罗德尼金斯曼的Omkstak 椅子这样标志性家具，使其成为那个时代的视 觉象征。"
+#         "text": "苹果的影响力与智能设计"
 #     },
 #     {
 #         "id": 3,
-#         "text": "图1:1971年，罗德尼金斯曼为 OMK设计的Omkstak椅子"
+#         "text": "苹果公司在乔纳森艾夫的带领下，以iMac和 iPhone等产品重新定义智能设计。这些产品凭直 观界面和创新功能赢得用户喜爱，同时标志着设 计与技术的完美结合。苹果通过智能设计，让产 品成为个人生活的重要部分，激励科技公司探索 设计创新的可能性。"
 #     },
 #     {
 #         "id": 4,
-#         "text": "图2:1972年，理查德萨普尔大 Artemide设计的Tizio工作灯"
+#         "text": "1989年柏林墙倒塌象征着新国际秩序的开端 设计界也在此时见证了全球设计明星的崛起，如 罗南阿拉德和贾斯珀莫里森等设计师涌现，他 们的作品吸引了大量媒体曝光并赢得世界范围认 可。这些设计师通过创造性作品强调设计的全球 性和多样化，使其成为跨国交流的重要载体。"
 #     },
 #     {
 #         "id": 5,
-#         "text": "工艺复兴与人体工程学"
+#         "text": "图1:1994年，由罗南阿拉德为Kartell设计的Bookworm书架"
 #     },
 #     {
 #         "id": 6,
-#         "text": "设计的社会职能"
+#         "text": "图2:1998年由乔纳森艾夫和苹果设计团队设计的iMac个人电脑"
 #     },
 #     {
 #         "id": 7,
-#         "text": "工艺复兴与人体工程学在70年代中叶并行发 展，设计强调与用户的物理和情感连接，一方 面响应高技派设计的冷感、设计师诵讨探卖传 统手工艺的价值和功能性家具如彼得奥普斯 维克的Balans Variable椅子，提升产品舒适 性与实用性。"
+#         "text": "艺术与设计的结合"
 #     },
 #     {
 #         "id": 8,
-#         "text": "设计的社会使命在20世纪70年代中期也受到关注，功能性和安 全性被置于设计的优先地位。以佩帕内克的《为真实世界设 计》为代表，倡导产品设计应保进人与人之间的互动和满足实 际需求，推动设计创新与社会责任的结合，形成设计的新标 准"
+#         "text": "跨文化设计的影响"
 #     },
 #     {
 #         "id": 9,
-#         "text": "电子时代的影响"
+#         "text": "跨文化设计在全球化背景下日益兴盛，设计师通过融合不同文化的元 素创作出全球化产品。例如，Philippe Starck将东方简约美学结合西 方设计，创造出独具魅力的产品。这种文化交融不仅丰富了设计的多 样性，还让消费者在全球市场中体验多元文化的魅力，促进了设计的 创新与全球交流。"
 #     },
 #     {
 #         "id": 10,
-#         "text": "电子技术自70年代起改变设计格 局，从电子游戏到移动通信设备普 及，如摩托罗拉\"砖块\"大哥大和柬 尼随身听问世标志便携式电子产品 设计革命。设计从空间拓展至数字 领域，定义现代生活新模式。"
+#         "text": "在设计发展的同时，设计艺术的概念也 在不断扩展和深化，艺术与设计的融合 不仅体现在视觉的美观上，更是在功能 与形式上实现创新，成为现代设计的重 要趋势。以 Alque屏风系统为例，该作 品以有机形态和模块化组合将艺术与实 用完美结合，不仅带来富有装艺术感 的视觉体验，也彰显了现代设计对文化 价值与功能需求的平衡追求。"
 #     },
 #     {
 #         "id": 11,
-#         "text": "图4:1979年推出的首款察尼 随身听 (TPS-L2)"
+#         "text": "新荷兰设计"
 #     },
 #     {
 #         "id": 12,
-#         "text": "环保意识与手工艺"
+#         "text": "荷兰设计在国际上的崭露头角，Droog和Moooi是其代表。它们的 设计作品以独特的幽默感和简约风格，打破了传统设计的界限。荷 兰设计团体注重使用创新的材料和独特的设计语言，带来了一场视 AAAAA 觉上的革命，使得荷兰设计在全球设计界占据了一席之地。"
 #     },
 #     {
 #         "id": 13,
-#         "text": "随着工艺复兴，环保意识逐渐影响设计实践，设计师察觉到小 规模生产所带来的生态效益。他们推崇手工劳动，相信手工制 造不仅可降低环境负担，还能加强产品与用户的情感纽带，通 过设计实践传播绿色理念和可持续发展价值"
+#         "text": "图3:2002年，马滕巴斯为Moooi设计的Smoke系列家"
 #     },
 #     {
 #         "id": 14,
-#         "text": "图3:约1975年间，由埃米利奥安巴斯为 Anonima Castelli设计的Vertebra任务椅"
+#         "text": "可持续发展的设计思路"
 #     },
 #     {
 #         "id": 15,
-#         "text": "激进设计的再次兴起"
+#         "text": "新一代设计师慈加关注可持续发展。设计师们通过减少生产中的浪 费，推崇使用可循环的材料和技术，以实现环境效益的最大化。 这种可持续设计思路不仅是对环境的责任，也引领了未来设计的方 向，成为社会和谐发展的重要组成部分。"
 #     },
 #     {
 #         "id": 16,
-#         "text": "意大利激进设计在70年代末期重 新嘱起，设计师通过戏仿和实验性 设计挑战主流美学。诸如亚历山德 罗内迪尼的设计将传统家具重新 装饰，利用色彩和图案构建新的文 化符号，这是对现代主义停车设计 的有力回应。"
-#     },
-#     {
-#         "id": 17,
-#         "text": "图6:1978年，由亚历山德罗内迪尼为 Studio Alchimia 设计的普鲁斯特扶手椅"
-#     },
-#     {
-#         "id": 18,
-#         "text": "图5: 1973年1月的 《Casabella》封面 展示了Global Tools组织的成员"
+#         "text": "图4:2004年，由罗南和埃尔万布鲁莱克为Vitra 设计的Algue屏风系统。"
 #     }
 # ]
 
@@ -188,7 +299,9 @@ class QwenAssistant:
 # generator_assistant = QwenAssistant(assistant_id, workspace, api_key)
 
 # # 调用方法
-# a = generator_assistant.send_message('您好！请问您对后现代主义的哪个方面感兴趣？我们可以探讨其特点、相关运动如孟菲斯运动或新浪潮平面设计，以及它对品牌和国际设计的影响等。')
+# a = generator_assistant.send_message("""Dutch design still maintains its unique style and innovative spirit today. In addition to Droog and Moooi, there are many other designers and brands with international reputations. Studio Job, for example, is known for its bold colours and intricate patterns, while Marcel Wanders is known for his romantic and dramatic designs. The work of these designers continues to make an impact on a global scale.
+                                     
+#                                      """)
 # print(a)
 
 

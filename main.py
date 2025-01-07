@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from chatbot import ChatBot
-from chatbot import QwenAssistant
+from chatbot import Assistantbot
 from config import systemPromptPickerAgent1, systemPromptPickerAgent2, systemPromptPickerAgent3
 import uvicorn
 import sys
@@ -18,6 +18,7 @@ from pickerhandle import Search
 from generatorhandle import GeneratorHandler
 import datetime
 import json
+from openai import OpenAI
 
 # 将上一层文件夹添加到 Python 的搜索路径中
 sys.path.append(os.path.abspath('..'))
@@ -63,7 +64,9 @@ PickerAgent4 = ChatBot(systemPrompt=systemPromptPickerAgent1,model='qwen-turbo')
 PickerAgent5 = ChatBot(systemPrompt=systemPromptPickerAgent2,model='qwen-turbo')
 PickerAgent6 = ChatBot(systemPrompt=systemPromptPickerAgent3,model='qwen-turbo')
 
-GeneratorAssistant = QwenAssistant(assistant_id, workspace, api_key)
+# GeneratorAssistant = QwenAssistant(assistant_id, workspace, api_key)
+client = OpenAI()
+GeneratorAssistant = Assistantbot(client, "asst_YpyxHD5eDY3bmbUqJhDSV0Ij")
 
 
 class ChatRequest(BaseModel):
@@ -181,7 +184,7 @@ async def pickertoGenerator(feedback: PickerResponse):
         # assistant_data = json.loads(feedback.content)
         # 需要测测
         description = feedback.content
-        generatormiddlemsg = GeneratorAssistant.send_message(description)
+        generatormiddlemsg = GeneratorAssistant.get_ai_reply(description)
         print(generatormiddlemsg)
         generatordraw, generatorchat = GeneratorHandler(generatormiddlemsg)
         # 此处可以根据需求处理接收到的 rawoutput_picker
