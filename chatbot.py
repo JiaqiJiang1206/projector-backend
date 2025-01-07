@@ -307,8 +307,8 @@ class Assistantbot:
 
 
 # # PickerAgent 测试
-PickerAgent1 = ChatBot(systemPromptPickerAgent3, model="qwen-turbo-latest",)
-content = '''乔纳森艾夫和乔布斯是同一个时期的人吗？'''
-PickerAgent1.add_user_message(content)
-reply = PickerAgent1.get_reply()
-print(reply)
+# PickerAgent1 = ChatBot(systemPromptPickerAgent3, model="qwen-turbo-latest",)
+# content = '''乔纳森艾夫和乔布斯是同一个时期的人吗？'''
+# PickerAgent1.add_user_message(content)
+# reply = PickerAgent1.get_reply()
+# print(reply)
