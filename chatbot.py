@@ -1,4 +1,4 @@
-from open import OpenAI
+from openai import OpenAI
 from config import systemPromptSemanticAgent
 from config import systemPromptPickerAgent1, systemPromptPickerAgent2, systemPromptPickerAgent3
 import os
@@ -8,6 +8,7 @@ import dashscope
 
 # 加载环境变量
 load_dotenv()
+apiKey = os.getenv("sk-da762947f89040b0895a6099f807bf62")
 assistant_id = 'asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0'
 workspace = os.getenv("WORKSPACE")
 api_key = "sk-da762947f89040b0895a6099f807bf62"
@@ -305,3 +306,9 @@ class Assistantbot:
 # print(a)
 
 
+# # PickerAgent 测试
+PickerAgent1 = ChatBot(systemPromptPickerAgent3, model="qwen-turbo-latest",)
+content = '''乔纳森艾夫和乔布斯是同一个时期的人吗？'''
+PickerAgent1.add_user_message(content)
+reply = PickerAgent1.get_reply()
+print(reply)
