@@ -14,20 +14,37 @@ import os
 import whisper
 import torch
 import dashscope
-from pickerhandle import Search
-from generatorhandle import GeneratorHandler
+# from pickerhandle import Search
+# from generatorhandle import GeneratorHandler
 import datetime
 import json
 from openai import OpenAI
 
-# 将上一层文件夹添加到 Python 的搜索路径中
-sys.path.append(os.path.abspath('..'))
-from cosyvoice.cli.cosyvoice import CosyVoice
-from cosyvoice.utils.file_utils import load_wav
+# 手动添加目标 cosyvoice 的路径
+cosyvoice_path = '/Users/huangkexin/Workspace/Project/Projector/code/COSYVOICE/cosyvoice'
+if cosyvoice_path not in sys.path:
+    # 将路径插入到 sys.path 的最前面，确保优先加载此路径下的模块
+    sys.path.insert(0, cosyvoice_path)
+
+# 添加项目根目录到 sys.path
+project_root = '/Users/huangkexin/Workspace/Project/Projector/code/COSYVOICE'
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+# 打印 sys.path 验证路径优先级
+print("sys.path:", "\n".join(sys.path))
+
+# 再次尝试导入模块
+try:
+    from cosyvoice.cli.cosyvoice import CosyVoice
+    from cosyvoice.utils.file_utils import load_wav
+    print("CosyVoice module successfully imported!")
+except ModuleNotFoundError as e:
+    print(f"Module import error: {e}")
 import torchaudio
 
-cosyvoice = CosyVoice('../pretrained_models/CosyVoice-300M-SFT', load_jit=True, load_onnx=False, fp16=True)
-
+# cosyvoice = CosyVoice('../pretrained_models/CosyVoice-300M-SFT', load_jit=True, load_onnx=False, fp16=True)
+cosyvoice = CosyVoice('../pretrained_models/CosyVoice-300M-SFT')
 # 加载环境变量
 load_dotenv()
 assistant_id = 'asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0'
@@ -297,4 +314,5 @@ async def root():
 # 启动服务（可选：uvicorn main:app --reload --port 8080 --host 0.0.0.0
 if __name__ == "__main__":
     # export PYTHONPATH=../third_party/Matcha-TTS
+      
     uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)

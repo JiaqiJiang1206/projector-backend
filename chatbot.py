@@ -197,6 +197,8 @@ class Assistantbot:
 # GeneratorAssistant = Assistantbot(client, "asst_YpyxHD5eDY3bmbUqJhDSV0Ij")
 # reply = GeneratorAssistant.get_ai_reply("荷兰设计至今依然保持着其独特的风格和创新精神。除了Droog和Moooi，还有很多其他设计师和品牌在国际上享有盛誉。例如，Studio Job的作品以其大胆的色彩和复杂的图案闻名，而Marcel Wanders则以其浪漫和戏剧性的设计著称。这些设计师的作品继续在全球范围内产生影响。")
 # print(reply)
+# # 打印reply的类型
+# print(type(reply))
 
 # systemPromptPickerAgent 测试
 # posterContent = ChatBot(systemPrompt=systemPromptSemanticAgent, model="qwen-max-2024-09-19")
