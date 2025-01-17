@@ -18,7 +18,7 @@ from pickerhandle import Search
 from generatorhandle import GeneratorHandler
 import datetime
 import json
-from openai import OpenAI
+# from openai import OpenAI
 
 # 将上一层文件夹添加到 Python 的搜索路径中
 sys.path.append(os.path.abspath('..'))
@@ -26,13 +26,13 @@ from cosyvoice.cli.cosyvoice import CosyVoice
 from cosyvoice.utils.file_utils import load_wav
 import torchaudio
 
-cosyvoice = CosyVoice('../pretrained_models/CosyVoice-300M-SFT', load_jit=True, load_onnx=False, fp16=True)
+# cosyvoice = CosyVoice('../pretrained_models/CosyVoice-300M-SFT', load_jit=True, load_onnx=False, fp16=True)
+cosyvoice = CosyVoice('../pretrained_models/CosyVoice-300M-SFT')
 
 # 加载环境变量
 load_dotenv()
-assistant_id = 'asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0'
-workspace = os.getenv("WORKSPACE")
-api_key = os.getenv("API_KEY")
+
+api_key = "sk-da762947f89040b0895a6099f807bf62"
 dashscope.api_key = api_key
 
 # 设置 GPU 环境变量，强制使用 GPU 1
@@ -65,8 +65,8 @@ PickerAgent5 = ChatBot(systemPrompt=systemPromptPickerAgent2,model='qwen-turbo')
 PickerAgent6 = ChatBot(systemPrompt=systemPromptPickerAgent3,model='qwen-turbo')
 
 # GeneratorAssistant = QwenAssistant(assistant_id, workspace, api_key)
-client = OpenAI()
-GeneratorAssistant = Assistantbot(client, "asst_YpyxHD5eDY3bmbUqJhDSV0Ij")
+# client = OpenAI()
+# GeneratorAssistant = Assistantbot(client, "asst_YpyxHD5eDY3bmbUqJhDSV0Ij")
 
 
 class ChatRequest(BaseModel):
@@ -275,7 +275,7 @@ async def delete_file(file_path: str):
 # 定义一个接口返回音频文件
 @app.post("/api/sendaudio")
 async def get_audio(file_name: SendAudioRequest):
-    file_path ='/home/aidealstudio/jjq/CosyVoice/server/sft_{}.wav'.format(file_name.content)
+    file_path ='/home/aideal/Projector/backend/CosyVoice/projector-backend/sft_{}.wav'.format(file_name.content)
     print(file_path)
     try:
         # 检查文件是否存在

@@ -226,16 +226,16 @@ def Search(assistant_output: str, json_database_path: str):
     output.append(emotion)    # result[4]: ConversationType
     return output
 
-posterTalker = ChatBot(systemPrompt=systemPromptPickerAgent2, model="qwen-turbo")  
-content = """
-介绍品牌崛起和孟菲斯运动。
-仅回复所要求的 JSON 输出，遵守上述要求，不包含任何无关信息。
-请勿在文本中包含参考文献、引文或任何来源注释。!
-请仅以纯文本形式回复。确保答案不包含任何代码格式或代码块，如 ``json.
-"""
-posterTalker.add_user_message(content)
-assistantOutput = posterTalker.get_reply()
-print(assistantOutput)
+# posterTalker = ChatBot(systemPrompt=systemPromptPickerAgent2, model="qwen-turbo")  
+# content = """
+# 介绍品牌崛起和孟菲斯运动。
+# 仅回复所要求的 JSON 输出，遵守上述要求，不包含任何无关信息。
+# 请勿在文本中包含参考文献、引文或任何来源注释。!
+# 请仅以纯文本形式回复。确保答案不包含任何代码格式或代码块，如 ``json.
+# """
+# posterTalker.add_user_message(content)
+# assistantOutput = posterTalker.get_reply()
+# print(assistantOutput)
 
-output = Search(assistantOutput, 'eval2_grouped.json')
-print(output)
+# output = Search(assistantOutput, 'eval2_grouped.json')
+# print(output)

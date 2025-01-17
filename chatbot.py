@@ -8,9 +8,8 @@ import dashscope
 
 # 加载环境变量
 load_dotenv()
-apiKey = os.getenv("sk-da762947f89040b0895a6099f807bf62")
+apiKey = "sk-da762947f89040b0895a6099f807bf62"
 assistant_id = 'asst_0c9a8326-2d15-4aa6-96fd-ea4ff9fc87f0'
-workspace = os.getenv("WORKSPACE")
 api_key = "sk-da762947f89040b0895a6099f807bf62"
 dashscope.api_key = api_key
 

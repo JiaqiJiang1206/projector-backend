@@ -58,7 +58,6 @@ multidict==6.1.0
 networkx==3.2.1
 ninja==1.11.1.3
 numba==0.60.0
-numpy @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_dbvs82799s/croot/numpy_and_numpy_base_1677549685398/work
 omegaconf==2.3.0
 onnxruntime==1.19.2
 openai-whisper==20240930
