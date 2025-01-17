@@ -224,8 +224,8 @@ async def pickertoGenerator(feedback: PickerResponse):
 @app.post("/api/transcribe")
 async def transcribe_audio(
     file: UploadFile, 
-    language: str = Form("zh"), 
-    initial_prompt: str = Form("请转录为简体中文。")
+    language: str = Form("en"), 
+    initial_prompt: str = Form("请转录为英文。")
 ):
     """
     接受音频文件并返回转录文字
@@ -257,7 +257,7 @@ async def start_audio(request: ChatAudioRequest):
     print(request.content)
     count = 0
     # change stream=True for chunk stream inference
-    for i, j in enumerate(cosyvoice.inference_sft(request.content, '中文女', stream=False)):
+    for i, j in enumerate(cosyvoice.inference_sft(request.content, '英文女', stream=False)):
         torchaudio.save('sft_{}.wav'.format(i), j['tts_speech'], 22050)
         count = i + 1
     print("生成了"+str(count)+"个音频文件")
