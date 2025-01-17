@@ -17,8 +17,8 @@ systemPromptPickerAgent1 = '''
 1. 对话内容首先应与highlight的内容高度相关，还要补充海报上没有但基于你的常识扩展的与设计历史相关的内容。
 2. 讲解完后，你需要结合当前内容和海报中的其他部分，询问用户们是否对当前话题的深入部分或海报上的其他具体内容感兴趣，引导他们继续探索。你的询问是询问用户希望听哪部分的讲解，而不是问他们具体设计问题的答案和看法。
 3. 最后引导用户查看右边的扩展内容了解更多。
-4. 每次"Dialogue"的输出大约100个字左右。
-5. 你的语言风格通俗易懂，口语化。
+4. 每次"Dialogue"的输出大约100个字左右，Dialogue输出英文。
+5. 你的语言风格通俗易懂，口语化，你说英文。
 6. 输出前检查你的对话是否符合事实，不要编造虚假信息。
 
 # 你的知识 #
@@ -26,119 +26,124 @@ systemPromptPickerAgent1 = '''
 [
     {
         "id": 0,
-        "text": "理性与工艺的变革",
+        "text": "Reform of Rationality and Craftsmanship",
         "Group": 1,
         "Type": "海报标题"
     },
     {
         "id": 1,
-        "text": "高技派风格的后示",
+        "text": "The Aftermath of High-Tech Style",
         "Group": 2,
         "Type": "小主题"
     },
     {
         "id": 2,
-        "text": "高技派设计风格在1970年代兴起，其灵感源 于工业和技术的精简美学。建筑师如理查德 罗杰斯和诺曼-福斯特强调通过裸露的钢梁和 管道元素打造出功能至上的设计，这些作品不 仅实用，还极具视觉冲击力。此风格在室内设 计中延续，通过像罗德尼金斯曼的Omkstak 椅子这样标志性家具，使其成为那个时代的视 觉象征。",
+        "text": "The High-Tech design style emerged in the 1970s, drawing inspiration from the streamlined aesthetics of industry and technology. Architects like Richard Rogers and Norman Foster emphasized functionality in their designs through exposed steel beams and pipework, creating designs that were not only practical but also visually striking. This style extended into interior design, becoming a visual hallmark of the era through iconic furniture like Rodney Kinsman's Omkstak chair.",
         "Group": 2,
         "Type": "文本内容"
     },
     {
         "id": 3,
-        "text": "图1:1971年，罗德尼金斯曼为 OMK设计的Omkstak椅子",
+        "text": "Figure 1: The Omkstak chair designed by Rodney Kinsman for OMK in 1971",
         "Group": 2,
         "Type": "图片描述"
     },
     {
         "id": 4,
-        "text": "图2:1972年，理查德萨普尔大 Artemide设计的Tizio工作灯",
+        "text": "Figure 2: The Tizio desk lamp designed by Richard Sapper for Artemide in 1972",
         "Group": 2,
         "Type": "图片描述"
     },
     {
         "id": 5,
-        "text": "工艺复兴与人体工程学",
+        "text": "Craft Revival and Ergonomics",
         "Group": 3,
         "Type": "小主题"
     },
     {
         "id": 7,
-        "text": "工艺复兴与人体工程学在70年代中叶并行发 展，设计强调与用户的物理和情感连接，一方 面响应高技派设计的冷感、设计师诵讨探卖传 统手工艺的价值和功能性家具如彼得奥普斯 维克的Balans Variable椅子，提升产品舒适 性与实用性。",
+        "text": "The parallel development of craft revival and ergonomics during the mid-1970s emphasized physical and emotional connections with users. In response to the perceived coldness of High-Tech design, designers explored the value of traditional craftsmanship and functional furniture, such as Pete Opsvik's Balans Variable chair, enhancing comfort and practicality.",
+        "Group": 3,
+        "Type": "文本内容"
+    },
+    {
+        "id": 13,
+        "text": "As part of the craft revival, environmental awareness increasingly influenced design practices. Designers recognized the ecological benefits of small-scale production, emphasizing handcrafting as a means to reduce environmental impact while fostering emotional connections between products and users, thereby promoting sustainability through design.",
         "Group": 3,
         "Type": "文本内容"
     },
     {
         "id": 14,
-        "text": "图3:约1975年间，由埃米利奥安巴斯为 Anonima Castelli设计的Vertebra任务椅",
+        "text": "Figure 3: The Vertebra task chair designed by Emilio Ambasz for Anonima Castelli, circa 1975",
         "Group": 3,
         "Type": "图片描述"
     },
     {
         "id": 6,
-        "text": "设计的社会职能",
+        "text": "The Social Function of Design",
         "Group": 4,
         "Type": "小主题"
     },
     {
         "id": 8,
-        "text": "设计的社会使命在20世纪70年代中期也受到关注，功能性和安 全性被置于设计的优先地位。以佩帕内克的《为真实世界设 计》为代表，倡导产品设计应保进人与人之间的互动和满足实 际需求，推动设计创新与社会责任的结合，形成设计的新标 准",
+        "text": "The social mission of design gained attention in the mid-1970s, prioritizing functionality and safety. Victor Papanek's Design for the Real World exemplified this, advocating for product designs that foster human interaction and address real-world needs, thus merging innovation with social responsibility to establish new design standards.",
         "Group": 4,
         "Type": "文本内容"
     },
     {
         "id": 9,
-        "text": "电子时代的影响",
+        "text": "The Impact of the Electronic Era",
         "Group": 5,
         "Type": "小主题"
     },
     {
         "id": 10,
-        "text": "电子技术自70年代起改变设计格 局，从电子游戏到移动通信设备普 及，如摩托罗拉砖块大哥大和柬 尼随身听问世标志便携式电子产品 设计革命。设计从空间拓展至数字 领域，定义现代生活新模式。",
+        "text": "Electronic technology began reshaping the design landscape from the 1970s, spanning from video games to mobile communication devices. Milestones such as Motorola's brick-like mobile phone and Sony's Walkman heralded a revolution in portable electronics. Design extended from physical spaces into the digital realm, defining new patterns of modern life.",
         "Group": 5,
         "Type": "文本内容"
     },
     {
         "id": 11,
-        "text": "图4:1979年推出的首款察尼 随身听 (TPS-L2)",
+        "text": "Figure 4: The first Sony Walkman (TPS-L2), launched in 1979",
         "Group": 5,
         "Type": "图片描述"
     },
     {
         "id": 12,
-        "text": "环保意识与手工艺",
+        "text": "Environmental Awareness and Craftsmanship",
         "Group": 6,
         "Type": "小主题"
     },
     {
         "id": 13,
-        "text": "随着工艺复兴，环保意识逐渐影响设计实践，设计师察觉到小 规模生产所带来的生态效益。他们推崇手工劳动，相信手工制 造不仅可降低环境负担，还能加强产品与用户的情感纽带，通 过设计实践传播绿色理念和可持续发展价值",
+        "text": "As part of the craft revival, environmental awareness increasingly influenced design practices. Designers recognized the ecological benefits of small-scale production, emphasizing handcrafting as a means to reduce environmental impact while fostering emotional connections between products and users, thereby promoting sustainability through design.",
         "Group": 6,
         "Type": "文本内容"
     },
     {
         "id": 15,
-        "text": "激进设计的再次兴起",
+        "text": "The Resurgence of Radical Design",
         "Group": 7,
         "Type": "小主题"
     },
     {
         "id": 16,
-        "text": "意大利激进设计在70年代末期重 新嘱起，设计师通过戏仿和实验性 设计挑战主流美学。诸如亚历山德 罗内迪尼的设计将传统家具重新 装饰，利用色彩和图案构建新的文 化符号，这是对现代主义停车设计 的有力回应。",
+        "text": "Italian Radical Design experienced a resurgence in the late 1970s, with designers challenging mainstream aesthetics through parody and experimental designs. Works like Alessandro Mendini's redesigned traditional furniture used bold colors and patterns to construct new cultural symbols, offering a compelling critique of modernist traditions.",
         "Group": 7,
         "Type": "文本内容"
     },
     {
         "id": 17,
-        "text": "图6:1978年，由亚历山德罗内迪尼为 Studio Alchimia 设计的普鲁斯特扶手椅",
+        "text": "Figure 5: The January 1973 Casabella cover featuring members of the GlobalTools organization",
         "Group": 7,
         "Type": "图片描述"
     },
     {
         "id": 18,
-        "text": "图5: 1973年1月的 《Casabella》封面 展示了Global Tools组织的成员",
+        "text": "Figure 6: The Proust armchair designed by Alessandro Mendini for Studio Alchimia in 1978",
         "Group": 7,
         "Type": "图片描述"
-    }
-]
+   
 
 ## 批判性思维对话风格 ##
 01. 说服型对话：你通过清晰的论据和逻辑，引导用户理解学术展览海报的核心意义，帮助他们认识其在知识传播中的重要性和独特价值。
@@ -280,8 +285,8 @@ systemPromptPickerAgent2 = '''
 1. 对话内容首先应与highlight的内容高度相关，还要补充海报上没有但基于你的常识扩展的与设计历史相关的内容。
 2. 讲解完后，你需要结合当前内容和海报中的其他部分，询问用户们是否对当前话题的深入部分或海报上的其他具体内容感兴趣，引导他们继续探索。你的询问是询问用户希望听哪部分的讲解，而不是问他们具体设计问题的答案和看法。
 3. 最后引导用户查看右边的扩展内容了解更多。
-4. 每次"Dialogue"的输出大约100个字左右。
-5. 你的语言风格通俗易懂，口语化。
+4. 每次"Dialogue"的输出大约100个字左右，Dialogue输出为英文。
+5. 你的语言风格通俗易懂，口语化，语言为英文。
 6. 输出前检查你的对话是否符合事实，不要编造虚假信息。
 
 # 你的知识 #
@@ -289,103 +294,220 @@ systemPromptPickerAgent2 = '''
 [
     {
         "id": 0,
-        "text": "后现代主义的兴起",
+        "text": "Reform of Rationality and Craftsmanship",
         "Group": 1,
         "Type": "海报标题"
     },
     {
         "id": 1,
-        "text": "后现代主义的特点",
+        "text": "The Aftermath of High-Tech Style",
         "Group": 2,
         "Type": "小主题"
     },
     {
         "id": 2,
-        "text": "后现代主义在设计中标志着折衷主义、讽刺性与对传统形式的不屑一顾。设计师如迈克尔-格雷夫斯，通过玩味 地整合古典元素和建筑结构，创造出趣味性与新颖性兼备的视觉体验。此外，设计中注入幽默感和历史性引用成 为这个时期的标志，使得过去与现代的界限模糊。",
+        "text": "The High-Tech design style emerged in the 1970s, drawing inspiration from the streamlined aesthetics of industry and technology. Architects like Richard Rogers and Norman Foster emphasized functionality in their designs through exposed steel beams and pipework, creating designs that were not only practical but also visually striking. This style extended into interior design, becoming a visual hallmark of the era through iconic furniture like Rodney Kinsman's Omkstak chair.",
         "Group": 2,
         "Type": "文本内容"
     },
     {
         "id": 3,
-        "text": "孟菲斯运动",
+        "text": "Figure 1: The Omkstak chair designed by Rodney Kinsman for OMK in 1971",
+        "Group": 2,
+        "Type": "图片描述"
+    },
+    {
+        "id": 4,
+        "text": "Figure 2: The Tizio desk lamp designed by Richard Sapper for Artemide in 1972",
+        "Group": 2,
+        "Type": "图片描述"
+    },
+    {
+        "id": 5,
+        "text": "Craft Revival and Ergonomics",
         "Group": 3,
         "Type": "小主题"
     },
     {
-        "id": 4,
-        "text": "孟菲斯团队由埃托雷索特萨斯于1980年代初发 起，以挑战传统设计规范为目标。他们强调鲜 艳的色彩、折衷的材料和丰富的形式。这一运 动在1981年米兰的首次亮相成为设计史上的重 要转折，体现了后现代主义实验精神的核心。 孟菲斯风格的大胆设计颠覆了传统家具设计， 也深刻影响了日常消费品的美学趋势",
+        "id": 7,
+        "text": "The parallel development of craft revival and ergonomics during the mid-1970s emphasized physical and emotional connections with users. In response to the perceived coldness of High-Tech design, designers explored the value of traditional craftsmanship and functional furniture, such as Pete Opsvik's Balans Variable chair, enhancing comfort and practicality.",
         "Group": 3,
         "Type": "文本内容"
     },
     {
-        "id": 5,
-        "text": "图1: 孟菲斯团队，1981年:在梅田正得设计的 Tawaraya 会话室放松身心",
+        "id": 13,
+        "text": "As part of the craft revival, environmental awareness increasingly influenced design practices. Designers recognized the ecological benefits of small-scale production, emphasizing handcrafting as a means to reduce environmental impact while fostering emotional connections between products and users, thereby promoting sustainability through design.",
+        "Group": 3,
+        "Type": "文本内容"
+    },
+    {
+        "id": 14,
+        "text": "Figure 3: The Vertebra task chair designed by Emilio Ambasz for Anonima Castelli, circa 1975",
         "Group": 3,
         "Type": "图片描述"
     },
     {
         "id": 6,
-        "text": "新浪潮平面设计",
+        "text": "The Social Function of Design",
+        "Group": 4,
+        "Type": "小主题"
+    },
+    {
+        "id": 8,
+        "text": "The social mission of design gained attention in the mid-1970s, prioritizing functionality and safety. Victor Papanek's Design for the Real World exemplified this, advocating for product designs that foster human interaction and address real-world needs, thus merging innovation with social responsibility to establish new design standards.",
+        "Group": 4,
+        "Type": "文本内容"
+    },
+    {
+        "id": 9,
+        "text": "The Impact of the Electronic Era",
+        "Group": 5,
+        "Type": "小主题"
+    },
+    {
+        "id": 10,
+        "text": "Electronic technology began reshaping the design landscape from the 1970s, spanning from video games to mobile communication devices. Milestones such as Motorola's brick-like mobile phone and Sony's Walkman heralded a revolution in portable electronics. Design extended from physical spaces into the digital realm, defining new patterns of modern life.",
+        "Group": 5,
+        "Type": "文本内容"
+    },
+    {
+        "id": 11,
+        "text": "Figure 4: The first Sony Walkman (TPS-L2), launched in 1979",
+        "Group": 5,
+        "Type": "图片描述"
+    },
+    {
+        "id": 12,
+        "text": "Environmental Awareness and Craftsmanship",
+        "Group": 6,
+        "Type": "小主题"
+    },
+    {
+        "id": 13,
+        "text": "As part of the craft revival, environmental awareness increasingly influenced design practices. Designers recognized the ecological benefits of small-scale production, emphasizing handcrafting as a means to reduce environmental impact while fostering emotional connections between products and users, thereby promoting sustainability through design.",
+        "Group": 6,
+        "Type": "文本内容"
+    },
+    {
+        "id": 15,
+        "text": "The Resurgence of Radical Design",
+        "Group": 7,
+        "Type": "小主题"
+    },
+    {
+        "id": 16,
+        "text": "Italian Radical Design experienced a resurgence in the late 1970s, with designers challenging mainstream aesthetics through parody and experimental designs. Works like Alessandro Mendini's redesigned traditional furniture used bold colors and patterns to construct new cultural symbols, offering a compelling critique of modernist traditions.",
+        "Group": 7,
+        "Type": "文本内容"
+    },
+    {
+        "id": 17,
+        "text": "Figure 5: The January 1973 Casabella cover featuring members of the GlobalTools organization",
+        "Group": 7,
+        "Type": "图片描述"
+    },
+    {
+        "id": 18,
+        "text": "Figure 6: The Proust armchair designed by Alessandro Mendini for Studio Alchimia in 1978",
+        "Group": 7,
+        "Type": "图片描述"
+    }
+]
+(cosyvoice) (base) huangkexin@huangkexindeMacBook-Pro projector-backend % python chatbot.py
+[
+    {
+        "id": 0,
+        "text": "The Rise of Postmodernism",
+        "Group": 1,
+        "Type": "海报标题"
+    },
+    {
+        "id": 1,
+        "text": "Characteristics of Postmodernism",
+        "Group": 2,
+        "Type": "小主题"
+    },
+    {
+        "id": 2,
+        "text": "Postmodernism in design is characterized by eclecticism, irony, and a disregard for traditional forms Designers like Michael Graves playfully integrated classical elements with architectural structures, creating visual experiences that are both whimsical and novel. Humor and historical references became hallmarks of this period, blurring the lines between past and present.",
+        "Group": 2,
+        "Type": "文本内容"
+    },
+    {
+        "id": 3,
+        "text": "The Memphis Movement",
+        "Group": 3,
+        "Type": "小主题"
+    },
+    {
+        "id": 4,
+        "text": "The Memphis group, led by Ettore Sottsass in the early 1980s, aimed to challenge traditional design norms. They emphasized vibrant colors, eclectic materials, and bold forms. Their debut in Milan in 1981 marked a pivotal moment in design history embodying the experimentalspirit of postmodernism. Memphis' daring designs revolutionized traditional furniture design and profoundly influenced the aesthetics of everyday consumer goods",
+        "Group": 3,
+        "Type": "文本内容"
+    },
+    {
+        "id": 5,
+        "text": "Figure 1: The Memphis group, 1981: Relaxing in the Tawaraya Conversation Pit designed by Masanori Umeda",
+        "Group": 3,
+        "Type": "图片描述"
+    },
+    {
+        "id": 6,
+        "text": "New Wave Graphic Design",
         "Group": 4,
         "Type": "小主题"
     },
     {
         "id": 7,
-        "text": "新浪潮平面设计起源于反对瑞士现代主义的传统两格结构。 设计师通过利用层次和丰富的图像参考来打破常规，增加互 动性及动态的视觉效果，这使得新波设计更具活力和趣味 性。这样一种设计风格被广泛应用于广告、音乐海报和主流 媒体中，增强了观众的视觉参与感",
+        "text": "New Wave graphic design originated as a reaction against the rigid grid structures of Swiss modernism Designers broke conventions by incorporating layers and rich visual references to create interactive and dynamic visuals, making New Wave design more vibrant and engaging. This style found widespread application in advertisements, music posters, and mainstream media enhancing audience interaction and visual engagement.",
         "Group": 4,
         "Type": "文本内容"
     },
     {
         "id": 8,
-        "text": "图2:彼得夏尔于1984年左右设计的"秘泉"桌-",
+        "text": "Figure 2: The Secret Spring table designed by Peter Shire, circa 1984",
         "Group": 4,
         "Type": "图片描述"
     },
     {
         "id": 9,
-        "text": "体现了"加州新浪潮"设计风格",
-        "Group": 4,
-        "Type": "文本内容"
-    },
-    {
-        "id": 10,
-        "text": "创意回收运动",
+        "text": "The Creative Recycling Movement",
         "Group": 5,
         "Type": "小主题"
     },
     {
-        "id": 11,
-        "text": "创意回收运动兴起于20世纪80年代伦敦，由设计师 罗恩阿拉德等人引领。该运动反对传统设计理念， 倡导使用回收材料，将废旧物品转化为富有创意的 艺术品，重新诠释废料价值。作品风格不拘一格， 充满自然的狂野与无政府主义能量，颠覆了人们对 设计的认知。其深远影响挑战了艺术与功能的界 限，并激发了全球对可持续设计与环保的思考",
+        "id": 10,
+        "text": "The Creative Recycling Movement emerged in 1980s London, led bv designers like Ron Arad This movement rejected conventional design principles, advocating for the use of recycled materials to transform discarded items into creative artworks, redefining the value of waste The resulting designs were eclectic, embodying raw energy and anarchistic spirit, challenging conventional perceptions of design. Its profound influence bridged art and functionality, inspiring global thinking on sustainable design and environmental awareness.",
         "Group": 5,
         "Type": "文本内容"
     },
     {
-        "id": 12,
-        "text": "图3:罗思阿拉德为 One Off 于1981年设计的Rover椅",
+        "id": 11,
+        "text": "Figure 3: The Rover Chair designed by Ron Arad forOne Off in 1981",
         "Group": 5,
         "Type": "图片描述"
     },
     {
-        "id": 13,
-        "text": "品牌崛起",
+        "id": 12,
+        "text": "TheRise of Branding",
         "Group": 6,
         "Type": "小主题"
     },
     {
-        "id": 14,
-        "text": "国际影响",
+        "id": 13,
+        "text": "International Influence",
         "Group": 7,
         "Type": "小主题"
     },
     {
-        "id": 15,
-        "text": "后现代主义对于企业品牌设计的影响巨大，它超越 了国家文化的差异，吸引全球观众。品牌如耐克和 李维斯运用复杂的图形设计、标志件的符号和跨文 化策略，从而巩固其国际市场的主导地位。品牌形 象不仅限于宣传产品，还通过灵活的设计反映了当 代交化潮流。",
+        "id": 14,
+        "text": "Postmodernism had a profound impact on corporate branding, transcending cultura boundaries and appealing to qlobal audiences Brands like Nike and Levi's used sophisticated graphic design, iconic symbols, and cross- cultural strateqies to establish dominance in international markets. Branding extended beyond product promotion to reflect contemporary cultural trends through flexible and adaptive designs",
         "Group": 6,
         "Type": "文本内容"
     },
     {
-        "id": 16,
-        "text": "后现代主义通过共享的美学语言将全球设计师团结 在一起，日本的仓保史朗和法国的菲利普斯塔克等 设计师的作品即展现出这种跨文化对话。后现代风 格促进了设计的全球交流，不仅推动了设计的国际 演变，还为全球观众提供了相互理解和欣赏的机会",
+        "id": 15,
+        "text": "Postmodernism united global designers through a shared aesthetic language. Works by Japanese designer Shiro Kuramata and French designer Philippe Starck exemplify this cross-cultural dialogue. The postmodern style facilitated global exchange, driving the evolution of design internationally and offering opportunities for mutua understanding and appreciation among global audiences",
         "Group": 7,
         "Type": "文本内容"
     }
@@ -532,8 +654,8 @@ systemPromptPickerAgent3 = '''
 1. 对话内容首先应与highlight的内容高度相关，还要补充海报上没有但基于你的常识扩展的与设计历史相关的内容。
 2. 讲解完后，你需要结合当前内容和海报中的其他部分，询问用户们是否对当前话题的深入部分或海报上的其他具体内容感兴趣，引导他们继续探索。你的询问是询问用户希望听哪部分的讲解，而不是问他们具体设计问题的答案和看法。
 3. 最后引导用户查看右边的扩展内容了解更多。
-4. 每次"Dialogue"的输出大约100个字左右。
-5. 你的语言风格通俗易懂，口语化。
+4. 每次"Dialogue"的输出大约100个字左右，Dialogue输出英文。
+5. 你的语言风格通俗易懂，口语化，你说英文。
 6. 输出前检查你的对话是否符合事实，不要编造虚假信息。
 
 
@@ -542,103 +664,109 @@ systemPromptPickerAgent3 = '''
 [
     {
         "id": 0,
-        "text": "设计的全球化浪潮",
+        "text": "The Globalization Wave of Design",
         "Group": 1,
         "Type": "海报标题"
     },
     {
         "id": 1,
-        "text": "全球设计明星的嘱起",
+        "text": "The Rise of ClobalDesignlcons",
         "Group": 2,
         "Type": "小主题"
     },
     {
-        "id": 4,
-        "text": "1989年柏林墙倒塌象征着新国际秩序的开端 设计界也在此时见证了全球设计明星的崛起，如 罗南阿拉德和贾斯珀莫里森等设计师涌现，他 们的作品吸引了大量媒体曝光并赢得世界范围认 可。这些设计师通过创造性作品强调设计的全球 性和多样化，使其成为跨国交流的重要载体。",
+        "id": 3,
+        "text": "The fall of theBerlin Wall in1989 marked the beginning of a new international order, and the design world witnessed the rise of global design icons during this period. Designers such as Ronan Arad and Jasper Morrison emerged gaining extensive media exposure and worldwide recognition. Their creative works highlighted the global and diverse nature of design, making it an essential medium",
         "Group": 2,
         "Type": "文本内容"
     },
     {
-        "id": 5,
-        "text": "图1:1994年，由罗南阿拉德为Kartell设计的Bookworm书架",
+        "id": 6,
+        "text": "Figure 1: The Bookworm boakshelf designed by Ronan Arad for Kartellin 1994",
         "Group": 2,
         "Type": "图片描述"
     },
     {
         "id": 2,
-        "text": "苹果的影响力与智能设计",
+        "text": "Apple's Influence and Intelligent Design",
         "Group": 3,
         "Type": "小主题"
     },
     {
-        "id": 3,
-        "text": "苹果公司在乔纳森艾夫的带领下，以iMac和 iPhone等产品重新定义智能设计。这些产品凭直 观界面和创新功能赢得用户喜爱，同时标志着设 计与技术的完美结合。苹果通过智能设计，让产 品成为个人生活的重要部分，激励科技公司探索 设计创新的可能性。",
+        "id": 4,
+        "text": "Under Jonathan Ive's leadership, Apple redefined intelligent design with products like the iMac and iPhone. These products won users' favor through intuitive interfaces and innovative features, symbolizing the perfect marriage of design and technology. Through intelligent design, Apple made its products an integral part of persona life, inspiring tech companies to explore the possibilities of design innovation.",
         "Group": 3,
         "Type": "文本内容"
     },
     {
-        "id": 6,
-        "text": "图2:1998年由乔纳森艾夫和苹果设计团队设计的iMac个人电脑",
+        "id": 5,
+        "text": "cross-border exchange.",
+        "Group": 3,
+        "Type": "文本内容"
+    },
+    {
+        "id": 7,
+        "text": "Figure 2: The iMac personal computer designed by Jonathan Ive and the Apple design team in 1998",
         "Group": 3,
         "Type": "图片描述"
     },
     {
-        "id": 7,
-        "text": "艺术与设计的结合",
+        "id": 8,
+        "text": "The Impact of Cross-CulturalDesign",
         "Group": 4,
         "Type": "小主题"
     },
     {
         "id": 10,
-        "text": "在设计发展的同时，设计艺术的概念也 在不断扩展和深化，艺术与设计的融合 不仅体现在视觉的美观上，更是在功能 与形式上实现创新，成为现代设计的重 要趋势。以 Alque屏风系统为例，该作 品以有机形态和模块化组合将艺术与实 用完美结合，不仅带来富有装艺术感 的视觉体验，也彰显了现代设计对文化 价值与功能需求的平衡追求。",
+        "text": "Cross-cultural design has flourished in the context of globalization, as designers incorporate elements from diverse cultures to create global producis. For example, Philippe Starck combined Easternminimalist aesthetics with Western design to produce uniquely captivating works. This cultural blending not only enriched the diversity of design but also allowed consumers in qlobal markets to experience the charm of multiculturalism, promoting desian innovation and international exchange",
         "Group": 4,
         "Type": "文本内容"
-    },
-    {
-        "id": 16,
-        "text": "图4:2004年，由罗南和埃尔万布鲁莱克为Vitra 设计的Algue屏风系统。",
-        "Group": 4,
-        "Type": "图片描述"
-    },
-    {
-        "id": 8,
-        "text": "跨文化设计的影响",
-        "Group": 5,
-        "Type": "小主题"
     },
     {
         "id": 9,
-        "text": "跨文化设计在全球化背景下日益兴盛，设计师通过融合不同文化的元 素创作出全球化产品。例如，Philippe Starck将东方简约美学结合西 方设计，创造出独具魅力的产品。这种文化交融不仅丰富了设计的多 样性，还让消费者在全球市场中体验多元文化的魅力，促进了设计的 创新与全球交流。",
+        "text": "The Integration of Art and Design",
+        "Group": 5,
+        "Type": "小主题"
+    },
+    {
+        "id": 11,
+        "text": "As design evolved, the concept of design art continued to expand and deepen. The integration of art and design was not limited to aestheticappeal but also achieved innovation in functionality and form,becoming an important trend in modern design. The Algue Screen System exemplifies this by combining organic forms with modular compositions, perfectly merging art and utility. It not only delivers a visually artistic experience but also demonstrates modern design's pursuit of balancing cultural values and functional needs",
         "Group": 5,
         "Type": "文本内容"
     },
     {
-        "id": 11,
-        "text": "新荷兰设计",
+        "id": 17,
+        "text": "Figure 4:The Algue Screen System designed by Ronan and Erwan Bouroullec forVitrain 2004",
+        "Group": 5,
+        "Type": "图片描述"
+    },
+    {
+        "id": 12,
+        "text": "New Dutch Design",
         "Group": 6,
         "Type": "小主题"
     },
     {
-        "id": 12,
-        "text": "荷兰设计在国际上的崭露头角，Droog和Moooi是其代表。它们的 设计作品以独特的幽默感和简约风格，打破了传统设计的界限。荷 兰设计团体注重使用创新的材料和独特的设计语言，带来了一场视 AAAAA 觉上的革命，使得荷兰设计在全球设计界占据了一席之地。",
+        "id": 13,
+        "text": "Dutch design has gained international prominence, with Droog and Moooi as key representatives. Their designs, characterized by unique humor and minimalist style, broke traditional design boundaries. Dutch design groups focused on innovative materials and distinctive design languages, creating a visual revolution that established Dutch design asa significant force AAAA in the qlobal design scene.",
         "Group": 6,
         "Type": "文本内容"
     },
     {
-        "id": 13,
-        "text": "图3:2002年，马滕巴斯为Moooi设计的Smoke系列家",
+        "id": 14,
+        "text": "Figure 3: The Smoke series furniture designed by Maarten Baas for Moooiin 2002",
         "Group": 6,
         "Type": "图片描述"
     },
     {
-        "id": 14,
-        "text": "可持续发展的设计思路",
+        "id": 15,
+        "text": "Sustainable Design Approaches",
         "Group": 7,
         "Type": "小主题"
     },
     {
-        "id": 15,
-        "text": "新一代设计师慈加关注可持续发展。设计师们通过减少生产中的浪 费，推崇使用可循环的材料和技术，以实现环境效益的最大化。 这种可持续设计思路不仅是对环境的责任，也引领了未来设计的方 向，成为社会和谐发展的重要组成部分。",
+        "id": 16,
+        "text": "A new generation of designers focuses on sustainability emphasizing waste reduction during production and advocating for the use of recyclable materials and technologies to maximize environmental benefits. This approach to sustainable design is not only a responsibility toward the environment but also a direction for future design becoming an integral part of harmonious social development.",
         "Group": 7,
         "Type": "文本内容"
     }

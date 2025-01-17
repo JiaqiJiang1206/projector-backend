@@ -108,7 +108,7 @@ def convert_to_serializable(obj):
 def get_char(image_path, output_path):
     # 硬编码参数
     # IMAGE_PATHS = ['images/0.png']  # 可以添加更多图像路径，例如 ['images/0.png', 'images/1.png']
-    RECOGNITION_LEVEL = 'char'      # 选择 'char'、'word' 或 'line'
+    RECOGNITION_LEVEL = 'word'      # 选择 'char'、'word' 或 'line'
     # OUTPUT_JSON_PATH = 'output/bboxes2.json'
 
     # 创建输出目录
@@ -197,6 +197,7 @@ def get_char(image_path, output_path):
                         else:
                             print(f"警告: 字符bbox_formatted 点数不正确: {char_bbox_formatted}")
 
+
             elif RECOGNITION_LEVEL == 'word':
                 word_text = txt.get('words', [])
                 for j, word in enumerate(word_text):
@@ -247,7 +248,7 @@ def modify_json(input_file, output_file):
         data = json.load(file)
 
     # 获取 list
-    image_data_list = data.get("images/eval2.png", [])
+    image_data_list = data.get("images/eval1_en.png", [])
 
     # 建立新的数据结构数组
     new_data_list = []
@@ -282,7 +283,7 @@ def construct_only_group(input_file, output_file):
         json.dump(new_data_list, file, indent=4, ensure_ascii=False)
 
 if __name__ == "__main__":
-    input_img_path = "images/eval2.png"
+    input_img_path = "images/eval1_en.png"
     # 基于当前输入图片的文件名，生成输出 JSON 文件的文件名，并且表示出保存的是原始数据
     raw_output_json = f"output/{os.path.basename(input_img_path).split('.')[0]}_raw_char.json"
     get_char([input_img_path], raw_output_json)

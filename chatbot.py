@@ -198,96 +198,100 @@ class Assistantbot:
 # print(reply)
 
 # systemPromptPickerAgent 测试
-# posterContent = ChatBot(systemPrompt=systemPromptSemanticAgent, model="qwen-max-2024-09-19")
-# content = '''
-# 按照设计历史的海报主题19世纪90年代的设计历史内容设计的全球化浪潮，进行最贴近主题的分区，不要单纯按出现顺序分组。有的图片跟主题的id顺序不在一起，但你需要根据图片信息和你已知的设计历史的常识，来判断该图片最属于哪个小主题。
+posterContent = ChatBot(systemPrompt=systemPromptSemanticAgent, model="qwen-max-2024-09-19")
+content = '''
+按照设计历史的海报主题，进行最贴近主题的分区，不要单纯按出现顺序分组。有的图片跟主题的id顺序不在一起，但你需要根据图片信息和你已知的设计历史的常识，来判断该图片最属于哪个小主题。
 
-# 海报内容：
-# [
-#     {
-#         "id": 0,
-#         "text": "设计的全球化浪潮"
-#     },
-#     {
-#         "id": 1,
-#         "text": "全球设计明星的嘱起"
-#     },
-#     {
-#         "id": 2,
-#         "text": "苹果的影响力与智能设计"
-#     },
-#     {
-#         "id": 3,
-#         "text": "苹果公司在乔纳森艾夫的带领下，以iMac和 iPhone等产品重新定义智能设计。这些产品凭直 观界面和创新功能赢得用户喜爱，同时标志着设 计与技术的完美结合。苹果通过智能设计，让产 品成为个人生活的重要部分，激励科技公司探索 设计创新的可能性。"
-#     },
-#     {
-#         "id": 4,
-#         "text": "1989年柏林墙倒塌象征着新国际秩序的开端 设计界也在此时见证了全球设计明星的崛起，如 罗南阿拉德和贾斯珀莫里森等设计师涌现，他 们的作品吸引了大量媒体曝光并赢得世界范围认 可。这些设计师通过创造性作品强调设计的全球 性和多样化，使其成为跨国交流的重要载体。"
-#     },
-#     {
-#         "id": 5,
-#         "text": "图1:1994年，由罗南阿拉德为Kartell设计的Bookworm书架"
-#     },
-#     {
-#         "id": 6,
-#         "text": "图2:1998年由乔纳森艾夫和苹果设计团队设计的iMac个人电脑"
-#     },
-#     {
-#         "id": 7,
-#         "text": "艺术与设计的结合"
-#     },
-#     {
-#         "id": 8,
-#         "text": "跨文化设计的影响"
-#     },
-#     {
-#         "id": 9,
-#         "text": "跨文化设计在全球化背景下日益兴盛，设计师通过融合不同文化的元 素创作出全球化产品。例如，Philippe Starck将东方简约美学结合西 方设计，创造出独具魅力的产品。这种文化交融不仅丰富了设计的多 样性，还让消费者在全球市场中体验多元文化的魅力，促进了设计的 创新与全球交流。"
-#     },
-#     {
-#         "id": 10,
-#         "text": "在设计发展的同时，设计艺术的概念也 在不断扩展和深化，艺术与设计的融合 不仅体现在视觉的美观上，更是在功能 与形式上实现创新，成为现代设计的重 要趋势。以 Alque屏风系统为例，该作 品以有机形态和模块化组合将艺术与实 用完美结合，不仅带来富有装艺术感 的视觉体验，也彰显了现代设计对文化 价值与功能需求的平衡追求。"
-#     },
-#     {
-#         "id": 11,
-#         "text": "新荷兰设计"
-#     },
-#     {
-#         "id": 12,
-#         "text": "荷兰设计在国际上的崭露头角，Droog和Moooi是其代表。它们的 设计作品以独特的幽默感和简约风格，打破了传统设计的界限。荷 兰设计团体注重使用创新的材料和独特的设计语言，带来了一场视 AAAAA 觉上的革命，使得荷兰设计在全球设计界占据了一席之地。"
-#     },
-#     {
-#         "id": 13,
-#         "text": "图3:2002年，马滕巴斯为Moooi设计的Smoke系列家"
-#     },
-#     {
-#         "id": 14,
-#         "text": "可持续发展的设计思路"
-#     },
-#     {
-#         "id": 15,
-#         "text": "新一代设计师慈加关注可持续发展。设计师们通过减少生产中的浪 费，推崇使用可循环的材料和技术，以实现环境效益的最大化。 这种可持续设计思路不仅是对环境的责任，也引领了未来设计的方 向，成为社会和谐发展的重要组成部分。"
-#     },
-#     {
-#         "id": 16,
-#         "text": "图4:2004年，由罗南和埃尔万布鲁莱克为Vitra 设计的Algue屏风系统。"
-#     }
-# ]
+海报内容：
+[
+    {
+        "id": 0,
+        "text": "The Globalization Wave of Design"
+    },
+    {
+        "id": 1,
+        "text": "The Rise of ClobalDesignlcons"
+    },
+    {
+        "id": 2,
+        "text": "Apple's Influence and Intelligent Design"
+    },
+    {
+        "id": 3,
+        "text": "The fall of theBerlin Wall in1989 marked the beginning of a new international order, and the design world witnessed the rise of global design icons during this period. Designers such as Ronan Arad and Jasper Morrison emerged gaining extensive media exposure and worldwide recognition. Their creative works highlighted the global and diverse nature of design, making it an essential medium"
+    },
+    {
+        "id": 4,
+        "text": "Under Jonathan Ive's leadership, Apple redefined intelligent design with products like the iMac and iPhone. These products won users' favor through intuitive interfaces and innovative features, symbolizing the perfect marriage of design and technology. Through intelligent design, Apple made its products an integral part of persona life, inspiring tech companies to explore the possibilities of design innovation."
+    },
+    {
+        "id": 5,
+        "text": "cross-border exchange."
+    },
+    {
+        "id": 6,
+        "text": "Figure 1: The Bookworm boakshelf designed by Ronan Arad for Kartellin 1994"
+    },
+    {
+        "id": 7,
+        "text": "Figure 2: The iMac personal computer designed by Jonathan Ive and the Apple design team in 1998"
+    },
+    {
+        "id": 8,
+        "text": "The Impact of Cross-CulturalDesign"
+    },
+    {
+        "id": 9,
+        "text": "The Integration of Art and Design"
+    },
+    {
+        "id": 10,
+        "text": "Cross-cultural design has flourished in the context of globalization, as designers incorporate elements from diverse cultures to create global producis. For example, Philippe Starck combined Easternminimalist aesthetics with Western design to produce uniquely captivating works. This cultural blending not only enriched the diversity of design but also allowed consumers in qlobal markets to experience the charm of multiculturalism, promoting desian innovation and international exchange"
+    },
+    {
+        "id": 11,
+        "text": "As design evolved, the concept of design art continued to expand and deepen. The integration of art and design was not limited to aestheticappeal but also achieved innovation in functionality and form,becoming an important trend in modern design. The Algue Screen System exemplifies this by combining organic forms with modular compositions, perfectly merging art and utility. It not only delivers a visually artistic experience but also demonstrates modern design's pursuit of balancing cultural values and functional needs"
+    },
+    {
+        "id": 12,
+        "text": "New Dutch Design"
+    },
+    {
+        "id": 13,
+        "text": "Dutch design has gained international prominence, with Droog and Moooi as key representatives. Their designs, characterized by unique humor and minimalist style, broke traditional design boundaries. Dutch design groups focused on innovative materials and distinctive design languages, creating a visual revolution that established Dutch design asa significant force AAAA in the qlobal design scene."
+    },
+    {
+        "id": 14,
+        "text": "Figure 3: The Smoke series furniture designed by Maarten Baas for Moooiin 2002"
+    },
+    {
+        "id": 15,
+        "text": "Sustainable Design Approaches"
+    },
+    {
+        "id": 16,
+        "text": "A new generation of designers focuses on sustainability emphasizing waste reduction during production and advocating for the use of recyclable materials and technologies to maximize environmental benefits. This approach to sustainable design is not only a responsibility toward the environment but also a direction for future design becoming an integral part of harmonious social development."
+    },
+    {
+        "id": 17,
+        "text": "Figure 4:The Algue Screen System designed by Ronan and Erwan Bouroullec forVitrain 2004"
+    }
+]
 
-# 按照设计历史的海报主题19世纪90年代的设计历史内容设计的全球化浪潮，进行最贴近主题的分区，不要单纯按出现顺序分组。有的图片跟主题的id顺序不在一起，但你需要根据图片信息和你已知的设计历史的常识，来判断该图片最属于哪个小主题。
-# 注意："图片描述"需要与其内容最相关的小主题成为一组。每个图片描述都需要认真思考其与哪个小主题最相关，不要简单地与其前后文本按顺序相关联。图片的顺序有可能与其相隔的内容相关联，请认真考虑。
+按照设计历史的海报主题，进行最贴近主题的分区，不要单纯按出现顺序分组。有的图片跟主题的id顺序不在一起，但你需要根据图片信息和你已知的设计历史的常识，来判断该图片最属于哪个小主题。
+注意："图片描述"需要与其内容最相关的小主题成为一组。每个图片描述都需要认真思考其与哪个小主题最相关，不要简单地与其前后文本按顺序相关联。图片的顺序有可能与其相隔的内容相关联，请认真考虑。
 
-# # 约束条件 #
-# 仅回复所要求的 JSON 输出，遵守上述要求，不包含任何无关信息。
-# 请勿在文本中包含参考文献、引文或任何来源注释。!
-# 请仅以纯文本形式回复。确保答案不包含任何代码格式或代码块，如 ``json.
-# keywords必须是Poster Content中存在的词，不要无中生有，也不要做任何删改。
-# 你的输出需要严格按照json格式输出，并考虑到可能的转义字符问题，不要在字符串中再包含英文引号，以防json解析失败。
+# 约束条件 #
+仅回复所要求的 JSON 输出，遵守上述要求，不包含任何无关信息。
+请勿在文本中包含参考文献、引文或任何来源注释。!
+请仅以纯文本形式回复。确保答案不包含任何代码格式或代码块，如 ``json.
+keywords必须是Poster Content中存在的词，不要无中生有，也不要做任何删改。
+你的输出需要严格按照json格式输出，并考虑到可能的转义字符问题，不要在字符串中再包含英文引号，以防json解析失败。
 
-# '''
-# posterContent.add_user_message(content)
-# assistantOutput = posterContent.get_reply()
-# print(assistantOutput)
+'''
+posterContent.add_user_message(content)
+assistantOutput = posterContent.get_reply()
+print(assistantOutput)
 
 
 # # QwenAssistant 测试
