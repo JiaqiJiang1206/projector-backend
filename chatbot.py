@@ -198,100 +198,100 @@ class Assistantbot:
 # print(reply)
 
 # systemPromptPickerAgent 测试
-posterContent = ChatBot(systemPrompt=systemPromptSemanticAgent, model="qwen-max-2024-09-19")
-content = '''
-按照设计历史的海报主题，进行最贴近主题的分区，不要单纯按出现顺序分组。有的图片跟主题的id顺序不在一起，但你需要根据图片信息和你已知的设计历史的常识，来判断该图片最属于哪个小主题。
+# posterContent = ChatBot(systemPrompt=systemPromptSemanticAgent, model="qwen-max-2024-09-19")
+# content = '''
+# 按照设计历史的海报主题，进行最贴近主题的分区，不要单纯按出现顺序分组。有的图片跟主题的id顺序不在一起，但你需要根据图片信息和你已知的设计历史的常识，来判断该图片最属于哪个小主题。
 
-海报内容：
-[
-    {
-        "id": 0,
-        "text": "The Globalization Wave of Design"
-    },
-    {
-        "id": 1,
-        "text": "The Rise of ClobalDesignlcons"
-    },
-    {
-        "id": 2,
-        "text": "Apple's Influence and Intelligent Design"
-    },
-    {
-        "id": 3,
-        "text": "The fall of theBerlin Wall in1989 marked the beginning of a new international order, and the design world witnessed the rise of global design icons during this period. Designers such as Ronan Arad and Jasper Morrison emerged gaining extensive media exposure and worldwide recognition. Their creative works highlighted the global and diverse nature of design, making it an essential medium"
-    },
-    {
-        "id": 4,
-        "text": "Under Jonathan Ive's leadership, Apple redefined intelligent design with products like the iMac and iPhone. These products won users' favor through intuitive interfaces and innovative features, symbolizing the perfect marriage of design and technology. Through intelligent design, Apple made its products an integral part of persona life, inspiring tech companies to explore the possibilities of design innovation."
-    },
-    {
-        "id": 5,
-        "text": "cross-border exchange."
-    },
-    {
-        "id": 6,
-        "text": "Figure 1: The Bookworm boakshelf designed by Ronan Arad for Kartellin 1994"
-    },
-    {
-        "id": 7,
-        "text": "Figure 2: The iMac personal computer designed by Jonathan Ive and the Apple design team in 1998"
-    },
-    {
-        "id": 8,
-        "text": "The Impact of Cross-CulturalDesign"
-    },
-    {
-        "id": 9,
-        "text": "The Integration of Art and Design"
-    },
-    {
-        "id": 10,
-        "text": "Cross-cultural design has flourished in the context of globalization, as designers incorporate elements from diverse cultures to create global producis. For example, Philippe Starck combined Easternminimalist aesthetics with Western design to produce uniquely captivating works. This cultural blending not only enriched the diversity of design but also allowed consumers in qlobal markets to experience the charm of multiculturalism, promoting desian innovation and international exchange"
-    },
-    {
-        "id": 11,
-        "text": "As design evolved, the concept of design art continued to expand and deepen. The integration of art and design was not limited to aestheticappeal but also achieved innovation in functionality and form,becoming an important trend in modern design. The Algue Screen System exemplifies this by combining organic forms with modular compositions, perfectly merging art and utility. It not only delivers a visually artistic experience but also demonstrates modern design's pursuit of balancing cultural values and functional needs"
-    },
-    {
-        "id": 12,
-        "text": "New Dutch Design"
-    },
-    {
-        "id": 13,
-        "text": "Dutch design has gained international prominence, with Droog and Moooi as key representatives. Their designs, characterized by unique humor and minimalist style, broke traditional design boundaries. Dutch design groups focused on innovative materials and distinctive design languages, creating a visual revolution that established Dutch design asa significant force AAAA in the qlobal design scene."
-    },
-    {
-        "id": 14,
-        "text": "Figure 3: The Smoke series furniture designed by Maarten Baas for Moooiin 2002"
-    },
-    {
-        "id": 15,
-        "text": "Sustainable Design Approaches"
-    },
-    {
-        "id": 16,
-        "text": "A new generation of designers focuses on sustainability emphasizing waste reduction during production and advocating for the use of recyclable materials and technologies to maximize environmental benefits. This approach to sustainable design is not only a responsibility toward the environment but also a direction for future design becoming an integral part of harmonious social development."
-    },
-    {
-        "id": 17,
-        "text": "Figure 4:The Algue Screen System designed by Ronan and Erwan Bouroullec forVitrain 2004"
-    }
-]
+# 海报内容：
+# [
+#     {
+#         "id": 0,
+#         "text": "The Globalization Wave of Design"
+#     },
+#     {
+#         "id": 1,
+#         "text": "The Rise of ClobalDesignlcons"
+#     },
+#     {
+#         "id": 2,
+#         "text": "Apple's Influence and Intelligent Design"
+#     },
+#     {
+#         "id": 3,
+#         "text": "The fall of theBerlin Wall in1989 marked the beginning of a new international order, and the design world witnessed the rise of global design icons during this period. Designers such as Ronan Arad and Jasper Morrison emerged gaining extensive media exposure and worldwide recognition. Their creative works highlighted the global and diverse nature of design, making it an essential medium"
+#     },
+#     {
+#         "id": 4,
+#         "text": "Under Jonathan Ive's leadership, Apple redefined intelligent design with products like the iMac and iPhone. These products won users' favor through intuitive interfaces and innovative features, symbolizing the perfect marriage of design and technology. Through intelligent design, Apple made its products an integral part of persona life, inspiring tech companies to explore the possibilities of design innovation."
+#     },
+#     {
+#         "id": 5,
+#         "text": "cross-border exchange."
+#     },
+#     {
+#         "id": 6,
+#         "text": "Figure 1: The Bookworm boakshelf designed by Ronan Arad for Kartellin 1994"
+#     },
+#     {
+#         "id": 7,
+#         "text": "Figure 2: The iMac personal computer designed by Jonathan Ive and the Apple design team in 1998"
+#     },
+#     {
+#         "id": 8,
+#         "text": "The Impact of Cross-CulturalDesign"
+#     },
+#     {
+#         "id": 9,
+#         "text": "The Integration of Art and Design"
+#     },
+#     {
+#         "id": 10,
+#         "text": "Cross-cultural design has flourished in the context of globalization, as designers incorporate elements from diverse cultures to create global producis. For example, Philippe Starck combined Easternminimalist aesthetics with Western design to produce uniquely captivating works. This cultural blending not only enriched the diversity of design but also allowed consumers in qlobal markets to experience the charm of multiculturalism, promoting desian innovation and international exchange"
+#     },
+#     {
+#         "id": 11,
+#         "text": "As design evolved, the concept of design art continued to expand and deepen. The integration of art and design was not limited to aestheticappeal but also achieved innovation in functionality and form,becoming an important trend in modern design. The Algue Screen System exemplifies this by combining organic forms with modular compositions, perfectly merging art and utility. It not only delivers a visually artistic experience but also demonstrates modern design's pursuit of balancing cultural values and functional needs"
+#     },
+#     {
+#         "id": 12,
+#         "text": "New Dutch Design"
+#     },
+#     {
+#         "id": 13,
+#         "text": "Dutch design has gained international prominence, with Droog and Moooi as key representatives. Their designs, characterized by unique humor and minimalist style, broke traditional design boundaries. Dutch design groups focused on innovative materials and distinctive design languages, creating a visual revolution that established Dutch design asa significant force AAAA in the qlobal design scene."
+#     },
+#     {
+#         "id": 14,
+#         "text": "Figure 3: The Smoke series furniture designed by Maarten Baas for Moooiin 2002"
+#     },
+#     {
+#         "id": 15,
+#         "text": "Sustainable Design Approaches"
+#     },
+#     {
+#         "id": 16,
+#         "text": "A new generation of designers focuses on sustainability emphasizing waste reduction during production and advocating for the use of recyclable materials and technologies to maximize environmental benefits. This approach to sustainable design is not only a responsibility toward the environment but also a direction for future design becoming an integral part of harmonious social development."
+#     },
+#     {
+#         "id": 17,
+#         "text": "Figure 4:The Algue Screen System designed by Ronan and Erwan Bouroullec forVitrain 2004"
+#     }
+# ]
 
-按照设计历史的海报主题，进行最贴近主题的分区，不要单纯按出现顺序分组。有的图片跟主题的id顺序不在一起，但你需要根据图片信息和你已知的设计历史的常识，来判断该图片最属于哪个小主题。
-注意："图片描述"需要与其内容最相关的小主题成为一组。每个图片描述都需要认真思考其与哪个小主题最相关，不要简单地与其前后文本按顺序相关联。图片的顺序有可能与其相隔的内容相关联，请认真考虑。
+# 按照设计历史的海报主题，进行最贴近主题的分区，不要单纯按出现顺序分组。有的图片跟主题的id顺序不在一起，但你需要根据图片信息和你已知的设计历史的常识，来判断该图片最属于哪个小主题。
+# 注意："图片描述"需要与其内容最相关的小主题成为一组。每个图片描述都需要认真思考其与哪个小主题最相关，不要简单地与其前后文本按顺序相关联。图片的顺序有可能与其相隔的内容相关联，请认真考虑。
 
-# 约束条件 #
-仅回复所要求的 JSON 输出，遵守上述要求，不包含任何无关信息。
-请勿在文本中包含参考文献、引文或任何来源注释。!
-请仅以纯文本形式回复。确保答案不包含任何代码格式或代码块，如 ``json.
-keywords必须是Poster Content中存在的词，不要无中生有，也不要做任何删改。
-你的输出需要严格按照json格式输出，并考虑到可能的转义字符问题，不要在字符串中再包含英文引号，以防json解析失败。
+# # 约束条件 #
+# 仅回复所要求的 JSON 输出，遵守上述要求，不包含任何无关信息。
+# 请勿在文本中包含参考文献、引文或任何来源注释。!
+# 请仅以纯文本形式回复。确保答案不包含任何代码格式或代码块，如 ``json.
+# keywords必须是Poster Content中存在的词，不要无中生有，也不要做任何删改。
+# 你的输出需要严格按照json格式输出，并考虑到可能的转义字符问题，不要在字符串中再包含英文引号，以防json解析失败。
 
-'''
-posterContent.add_user_message(content)
-assistantOutput = posterContent.get_reply()
-print(assistantOutput)
+# '''
+# posterContent.add_user_message(content)
+# assistantOutput = posterContent.get_reply()
+# print(assistantOutput)
 
 
 # # QwenAssistant 测试
@@ -310,8 +310,8 @@ print(assistantOutput)
 
 
 # # PickerAgent 测试
-# PickerAgent1 = ChatBot(systemPromptPickerAgent3, model="qwen-turbo-latest",)
-# content = '''乔纳森艾夫和乔布斯是同一个时期的人吗？'''
+# PickerAgent1 = ChatBot(systemPromptPickerAgent1, model="qwen-turbo-latest",)
+# content = '''please introduce the high-tech style'''
 # PickerAgent1.add_user_message(content)
 # reply = PickerAgent1.get_reply()
 # print(reply)

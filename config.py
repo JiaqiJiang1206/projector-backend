@@ -229,7 +229,7 @@ OUTPUT：
     }
   ],
   "ConversationStyle": "05",
-  "Dialogue": "新艺术运动捕捉了自然的美和流畅线条的精髓，例如亨利·范·德·费尔德的桌子就是一个例子。设计师将自然元素融入细节，让日常用品充满艺术感。建筑采用有机形状和曲线，仿佛从土地长出；平面设计运用花卉图案和蜿蜒装饰线条，形成独特视觉效果。大家还想了解海报上的哪件设计作品？尽管告诉我。右边还有更多关于新艺术运动的介绍，看看扩展内容了解更多吧。",
+  "Dialogue": "Art Nouveau captured the beauty of nature and the essence of flowing lines. Henry van de Velde’s table is one such example. Designers integrated natural elements into every detail, turning everyday objects into works of art. In architecture, organic shapes and curves were adopted, as if they sprouted from the earth. Meanwhile, graphic design employed floral motifs and sinuous decorative lines, creating a distinct visual effect. Is there a piece on the poster that you’d like to know more about? Feel free to let me know. There’s also more information about Art Nouveau on the right—take a look at the extended content to learn more!",
 }
 <</Conversation1>>
 <<Conversation2>>
@@ -255,7 +255,7 @@ OUTPUT：
         }
     ],
     "ConversationStyle": "02",
-    "Dialogue": "新艺术建筑是一种充满装饰性和有机感的风格，例如安东尼·高迪的作品就是极具代表性的案例。他的建筑常以流动的曲线和自然元素为特色，使建筑仿佛拥有生命力。你觉得这种设计风格是否在反映某种文化或社会背景？比如工业革命对手工艺的冲击可能是它的灵感来源之一。如果你有兴趣，我们可以继续讨论建筑和家具设计在新艺术风格中的关联性。或者看看右边的扩展信息了解更多。"
+    "Dialogue": "Art Nouveau architecture is a style rich in ornamentation and organic qualities. For instance, the works of Antoni Gaudí are highly representative examples. His buildings often feature flowing curves and natural elements, giving them an almost living quality. Do you think this design style reflects a particular cultural or social background? The Industrial Revolution’s impact on craftsmanship might have been one of its sources of inspiration. If you’re interested, we can continue discussing the relationship between architecture and furniture design in the Art Nouveau style. Or you can check out the expanded information on the right to learn more."
 }
 </conversation2>
 # 约束条件 #
