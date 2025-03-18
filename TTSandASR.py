@@ -9,7 +9,7 @@ def transcribe_audio_file(file_path: str):
     :param file_path: 音频文件的绝对路径或相对路径
     :return: Whisper API 返回的转录结果对象
     """
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key=" ")
     with open(file_path, "rb") as audio_file:
         transcription = client.audio.transcriptions.create(
             model="whisper-1",
@@ -22,7 +22,7 @@ def transcribe_audio_file(file_path: str):
 # print(transcription.text)
 
 def generate_audio_files(audio_content:str):
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key=" ")
     speech_file_path = Path(__file__).parent / "sft_0.wav"
     response = client.audio.speech.create(
         model="tts-1",
