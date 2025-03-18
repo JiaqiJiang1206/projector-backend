@@ -18,6 +18,7 @@ from pickerhandle import Search
 from generatorhandle import GeneratorHandler
 import datetime
 import json
+from TTSandASR import transcribe_audio_file, generate_audio_files
 # from openai import OpenAI
 
 # 将上一层文件夹添加到 Python 的搜索路径中
@@ -223,9 +224,7 @@ async def pickertoGenerator(feedback: PickerResponse):
 
 @app.post("/api/transcribe")
 async def transcribe_audio(
-    file: UploadFile, 
-    language: str = Form("en"), 
-    initial_prompt: str = Form("请转录为英文。")
+    file: UploadFile
 ):
     """
     接受音频文件并返回转录文字
@@ -235,38 +234,28 @@ async def transcribe_audio(
         audio_path = f"temp_{file.filename}"
         with open(audio_path, "wb") as audio_file:
             audio_file.write(await file.read())
-        
-        # 使用 Whisper 转录音频
-        result = model.transcribe(
-            audio_path,
-            language=language,
-            word_timestamps=True,
-            initial_prompt=initial_prompt,
-        )
-        
-        # 返回转录结果
-        return JSONResponse(content={"text": result["text"], "segments": result["segments"]})
+        # 调用封装的转录方法
+        result = transcribe_audio_file(audio_path)
+
+        return JSONResponse(content={"text": result.text})
     
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
+
+
 #语音接口，开始生成语音数据
 @app.post("/api/startaudio")
 async def start_audio(request: ChatAudioRequest):
-  try:
-    print(request.content)
-    count = 0
-    # change stream=True for chunk stream inference
-    for i, j in enumerate(cosyvoice.inference_sft(request.content, '英文女', stream=False)):
-        torchaudio.save('sft_{}.wav'.format(i), j['tts_speech'], 22050)
-        count = i + 1
-    print("生成了"+str(count)+"个音频文件")
-    # 返回模型的回复
-    return {"reply": count}
-  except Exception as e:
-      print(f"Error: {e}")
-      raise HTTPException(status_code=500, detail="Failed to generate response")
-  
+    try:
+        audio_count = generate_audio_files(request.content)
+        return {"reply": audio_count}
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to generate response")
+
+
+
 async def delete_file(file_path: str):
     await asyncio.sleep(3)  # 模拟延迟
     if os.path.exists(file_path):
@@ -275,7 +264,7 @@ async def delete_file(file_path: str):
 # 定义一个接口返回音频文件
 @app.post("/api/sendaudio")
 async def get_audio(file_name: SendAudioRequest):
-    file_path ='/home/aideal/Projector/backend/CosyVoice/projector-backend/sft_{}.wav'.format(file_name.content)
+    file_path = os.path.join(os.path.dirname(__file__), f"sft_0.wav")
     print(file_path)
     try:
         # 检查文件是否存在
